@@ -21,7 +21,15 @@ public class HPPresenter : MonoBehaviour
     #endregion private変数
 
     #region 定数
-    private const int MAX_HP = 100;
+    /// <summary>
+    /// 最大HP
+    /// </summary>
+    private const int MAX_HP = 180;
+
+    /// <summary>
+    /// 1回のダメージで受けるダメージ
+    /// </summary>
+    private const int DAMAGE = 1;
     #endregion 定数
 
     private void Start()
@@ -36,7 +44,7 @@ public class HPPresenter : MonoBehaviour
 
         if (_currentTime > _span)
         {
-            _hPModel.GetDamage(1);
+            _hPModel.GetDamage(DAMAGE);
             _currentTime = 0f;
         }
     }
