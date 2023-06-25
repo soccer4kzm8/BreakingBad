@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 810595852}
   - component: {fileID: 810595853}
   - component: {fileID: 810595855}
-  - component: {fileID: 810595854}
+  - component: {fileID: 810595856}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -952,18 +952,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &810595854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810595851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ff83ac20aea91444a690db7f2cdf505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &810595855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,6 +965,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpGuage: {fileID: 810595853}
+--- !u!114 &810595856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810595851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5afaab65b28a0a4882fcc5af4d99b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hPView: {fileID: 810595855}
 --- !u!1 &819655883
 GameObject:
   m_ObjectHideFlags: 0

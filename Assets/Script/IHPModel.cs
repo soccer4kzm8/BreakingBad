@@ -17,4 +17,9 @@ public interface IHPModel
     /// </summary>
     /// <param name="decreasePoint">Œ¸‚ç‚·—Ê</param>
     public void GetDamage(int decreasePoint);
+
+    /// <summary>
+    /// ”jŠüˆ—
+    /// </summary>
+    public void OnDestroy();
 }

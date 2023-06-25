@@ -1,12 +1,11 @@
-using UnityEngine;
 using UniRx;
 
-public class HPModel : MonoBehaviour, IHPModel
+public class HPModel : IHPModel
 {
     /// <summary>
     /// 最大HP
     /// </summary>
-    public int MaxHP { private set; get; } = 100;
+    public int MaxHP { private set; get; }
 
     /// <summary>
     /// 残っているHP
@@ -15,8 +14,13 @@ public class HPModel : MonoBehaviour, IHPModel
 
     private readonly IntReactiveProperty _hp = new IntReactiveProperty();
 
-    private void Start()
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="maxHP">最大HP</param>
+    public HPModel(int maxHP)
     {
+        MaxHP = maxHP;
         _hp.Value = MaxHP;
     }
 
@@ -29,7 +33,10 @@ public class HPModel : MonoBehaviour, IHPModel
         _hp.Value -= decreasePoint;
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// 破棄処理
+    /// </summary>
+    public void OnDestroy()
     {
         _hp.Dispose();
     }
