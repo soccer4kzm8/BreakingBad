@@ -918,6 +918,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5927988056799805236, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927988056799805236, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5927988056799805242, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
       propertyPath: m_RootOrder
       value: 2

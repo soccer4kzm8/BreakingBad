@@ -7,6 +7,11 @@ public class PlayerMove : MonoBehaviour
     /// “®‚­‘¬‚³
     /// </summary>
     private float _moveSpeed = 5f;
+
+    /// <summary>
+    /// ‰ñ“]‘¬“x
+    /// </summary>
+    private float _rotationSpeed = 360f;
     private IInputEventProviders _playerInput;
     private Rigidbody _rigidbody;
     #endregion private•Ï”
@@ -23,10 +28,16 @@ public class PlayerMove : MonoBehaviour
         float horizontalInput = _playerInput.GetHorizontalInput();
         float verticalInput = _playerInput.GetVerticalInput();
 
-        // “ü—Í‚ÉŠî‚Ã‚¢‚ÄˆÚ“®—Ê‚ğŒvZ
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * _moveSpeed * Time.deltaTime;
-        Vector3 newPosition = _rigidbody.position + movement;
-        // ˆÚ“®—Ê‚ğŒ»İ‚ÌˆÊ’u‚É‰ÁZ
-        _rigidbody.MovePosition(newPosition);
+        // “ü—ÍƒxƒNƒgƒ‹‚ğ³‹K‰»
+        Vector3 movementDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        // ˆÚ“®—Ê
+        Vector3 movement = movementDirection * _moveSpeed;
+        _rigidbody.velocity = movement;
+
+        // ‰ñ“]ˆ—
+        if (movement == Vector3.zero) return;
+
+        Quaternion toRotation = Quaternion.LookRotation(movement);
+        _rigidbody.rotation = Quaternion.RotateTowards(_rigidbody.rotation, toRotation, _rotationSpeed * Time.deltaTime);
     }
 }
