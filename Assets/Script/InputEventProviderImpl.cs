@@ -19,4 +19,13 @@ public class InputEventProviderImpl : IInputEventProviders
     {
         return Input.GetAxis("Vertical");
     }
+
+    /// <summary>
+    /// アイテムを持ち上げる・放すの入力
+    /// </summary>
+    /// <returns></returns>
+    public bool GetCatchAndReleaseInput()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
 }
