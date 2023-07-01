@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     /// <summary>
     /// ‰ñ“]‘¬“x
     /// </summary>
-    private float _rotationSpeed = 360f;
+    private float _rotationSpeed = 3600f;
 
     private Rigidbody _bodyRigidbody;
 
