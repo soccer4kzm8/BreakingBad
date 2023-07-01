@@ -6,12 +6,12 @@ public class PlayerMove : MonoBehaviour
     /// <summary>
     /// 動く速さ
     /// </summary>
-    private float _moveSpeed = 5f;
+    private readonly float _moveSpeed = 5f;
 
     /// <summary>
     /// 回転速度
     /// </summary>
-    private float _rotationSpeed = 3600f;
+    private readonly float _rotationSpeed = 3600f;
 
     private Rigidbody _bodyRigidbody;
 
@@ -27,7 +27,12 @@ public class PlayerMove : MonoBehaviour
     private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
     #endregion private変数
 
-
+    #region 定数
+    /// <summary>
+    /// RaycastのmaxDistance
+    /// </summary>
+    private const float RAYCAST_MAX_DISTANCE = 2f;
+    #endregion 定数
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();
@@ -94,8 +99,7 @@ public class PlayerMove : MonoBehaviour
     private void CatchItem()
     {
         // 近くにあるアイテムを取得
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f) == false) return;
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, RAYCAST_MAX_DISTANCE) == false) return;
 
         if (hit.collider.CompareTag("Item") == false) return;
 
