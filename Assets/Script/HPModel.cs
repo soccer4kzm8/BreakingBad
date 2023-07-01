@@ -31,6 +31,7 @@ public class HPModel : IItemHPModel, IPlayerHPModel
     /// <param name="decreasePoint">å∏ÇÁÇ∑ó </param>
     public void GetDamage(int decreasePoint)
     {
+        if (_hp.Value < 0) return;
         _hp.Value -= decreasePoint;
     }
 
@@ -40,6 +41,7 @@ public class HPModel : IItemHPModel, IPlayerHPModel
     /// <param name="decreasePoint">ëùÇ‚Ç∑ó </param>
     public void GetRecovery(int increasePoint)
     {
+        if (_hp.Value >= MaxHP) return;
         _hp.Value += increasePoint;
     }
 

@@ -24,7 +24,7 @@ public class ItemHPPresenter : MonoBehaviour
     /// <summary>
     /// Å‘åHP
     /// </summary>
-    private const int MAX_HP = 180;
+    private const int MAX_HP = 10;
 
     /// <summary>
     /// 1‰ñ‚Åó‚¯‚é‰ñ•œ‚·‚é—Ê
