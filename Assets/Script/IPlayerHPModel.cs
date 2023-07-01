@@ -1,6 +1,6 @@
 using UniRx;
 
-public interface IHPModel
+public interface IPlayerHPModel
 {
     /// <summary>
     /// ç≈ëÂHP

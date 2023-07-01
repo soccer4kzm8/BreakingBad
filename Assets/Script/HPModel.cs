@@ -1,6 +1,6 @@
 using UniRx;
 
-public class HPModel : IHPModel
+public class HPModel : IPlayerHPModel
 {
     /// <summary>
     /// ç≈ëÂHP
