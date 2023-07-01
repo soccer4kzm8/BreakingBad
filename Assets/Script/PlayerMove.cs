@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    #region SerializeField
-    [SerializeField] private Rigidbody _bodyRigidbody;
-    #endregion SerializeField
     #region private変数
     /// <summary>
     /// 動く速さ
@@ -16,16 +13,33 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private float _rotationSpeed = 360f;
 
+    private Rigidbody _bodyRigidbody;
+
     private IInputEventProviders _playerInput;
 
     private GameObject _currentItem;
 
     private bool _isHoldingItem;
+
+    /// <summary>
+    /// 拾い上げられたアイテムの位置
+    /// </summary>
+    private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
     #endregion private変数
+
 
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();
+        _bodyRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        // キーの入力を取得
+        bool catchAndReleaseInput = _playerInput.GetCatchAndReleaseInput();
+
+        CatchAndReleaseItem(catchAndReleaseInput);
     }
 
     private void FixedUpdate()
@@ -33,11 +47,8 @@ public class PlayerMove : MonoBehaviour
         // キーの入力を取得
         float horizontalInput = _playerInput.GetHorizontalInput();
         float verticalInput = _playerInput.GetVerticalInput();
-        bool catchAndReleaseInput = _playerInput.GetCatchAndReleaseInput();
 
         Move(horizontalInput, verticalInput);
-
-        CatchAndReleaseItem(catchAndReleaseInput);
     }
 
     /// <summary>
@@ -88,13 +99,11 @@ public class PlayerMove : MonoBehaviour
 
         if (hit.collider.CompareTag("Item") == false) return;
 
-        //Debug.DrawRay(transform.position, transform.forward.normalized, Color.cyan);
         _isHoldingItem = true;
         _currentItem = hit.collider.gameObject;
         _currentItem.transform.SetParent(transform);
-        _currentItem.transform.localPosition = new Vector3(0f, 1f, 1f);
+        _currentItem.transform.localPosition = _caughtItemPosition;
         var rigidBody = _currentItem.GetComponent<Rigidbody>();
-        rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
         rigidBody.isKinematic = true;
     }
 
@@ -107,7 +116,6 @@ public class PlayerMove : MonoBehaviour
         _isHoldingItem = false;
         _currentItem.transform.SetParent(null);
         var rigidBody = _currentItem.GetComponent<Rigidbody>();
-        rigidBody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         rigidBody.isKinematic = false;
         _currentItem = null;
     }
