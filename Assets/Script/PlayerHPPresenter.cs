@@ -5,7 +5,7 @@ public class PlayerHPPresenter : MonoBehaviour
 {
     #region SerializeField
     [SerializeField] private HPView _hPView;
-    private IPlayerHPModel _hPModel;
+    private IPlayerHPModel _playerHPModel;
     #endregion SerializeField
 
     #region private•Ï”
@@ -34,8 +34,8 @@ public class PlayerHPPresenter : MonoBehaviour
 
     private void Start()
     {
-        _hPModel = new HPModel(MAX_HP);
-        _hPModel.HP.Subscribe(_ => _hPView.SetGuage(_hPModel.MaxHP, _hPModel.HP.Value)).AddTo(this);
+        _playerHPModel = new HPModel(MAX_HP, MAX_HP);
+        _playerHPModel.HP.Subscribe(_ => _hPView.SetGuage(_playerHPModel.MaxHP, _playerHPModel.HP.Value)).AddTo(this);
     }
 
     private void Update()
@@ -44,7 +44,7 @@ public class PlayerHPPresenter : MonoBehaviour
 
         if (_currentTime > _span)
         {
-            _hPModel.GetDamage(DAMAGE);
+            _playerHPModel.GetDamage(DAMAGE);
             _currentTime = 0f;
         }
     }
@@ -54,6 +54,6 @@ public class PlayerHPPresenter : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        _hPModel.OnDestroy();
+        _playerHPModel.OnDestroy();
     }
 }

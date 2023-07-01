@@ -5,7 +5,7 @@ public class ItemHPPresenter : MonoBehaviour
 {
     #region SerializeField
     [SerializeField] private HPView _hPView;
-    private IPlayerHPModel _hPModel;
+    private IItemHPModel _itemHPModel;
     #endregion SerializeField
 
     #region private変数
@@ -27,15 +27,15 @@ public class ItemHPPresenter : MonoBehaviour
     private const int MAX_HP = 180;
 
     /// <summary>
-    /// 1回のダメージで受けるダメージ
+    /// 1回で受ける回復する量
     /// </summary>
-    private const int DAMAGE = 1;
+    private const int RECOVERY = 1;
     #endregion 定数
 
     private void Start()
     {
-        _hPModel = new HPModel(MAX_HP);
-        _hPModel.HP.Subscribe(_ => _hPView.SetGuage(_hPModel.MaxHP, _hPModel.HP.Value)).AddTo(this);
+        _itemHPModel = new HPModel(MAX_HP, 0);
+        _itemHPModel.HP.Subscribe(_ => _hPView.SetGuage(_itemHPModel.MaxHP, _itemHPModel.HP.Value)).AddTo(this);
     }
 
     private void Update()
@@ -44,7 +44,7 @@ public class ItemHPPresenter : MonoBehaviour
 
         if (_currentTime > _span)
         {
-            _hPModel.GetDamage(DAMAGE);
+            _itemHPModel.GetRecovery(RECOVERY);
             _currentTime = 0f;
         }
     }
@@ -54,6 +54,6 @@ public class ItemHPPresenter : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        _hPModel.OnDestroy();
+        _itemHPModel.OnDestroy();
     }
 }

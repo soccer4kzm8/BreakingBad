@@ -1,6 +1,6 @@
 using UniRx;
 
-public class HPModel : IPlayerHPModel
+public class HPModel : IItemHPModel, IPlayerHPModel
 {
     /// <summary>
     /// 最大HP
@@ -18,10 +18,11 @@ public class HPModel : IPlayerHPModel
     /// コンストラクタ
     /// </summary>
     /// <param name="maxHP">最大HP</param>
-    public HPModel(int maxHP)
+    /// <param name="defaultHP">ゲーム開始のHP</param>
+    public HPModel(int maxHP, int defaultHP)
     {
         MaxHP = maxHP;
-        _hp.Value = MaxHP;
+        _hp.Value = defaultHP;
     }
 
     /// <summary>
@@ -31,6 +32,15 @@ public class HPModel : IPlayerHPModel
     public void GetDamage(int decreasePoint)
     {
         _hp.Value -= decreasePoint;
+    }
+
+    /// <summary>
+    /// 回復するときの処理
+    /// </summary>
+    /// <param name="decreasePoint">増やす量</param>
+    public void GetRecovery(int increasePoint)
+    {
+        _hp.Value += increasePoint;
     }
 
     /// <summary>

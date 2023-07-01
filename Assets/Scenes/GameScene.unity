@@ -729,6 +729,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5927988056783239049, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5927988056783239050, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -931,6 +935,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4569182450375427422, guid: 396653fc710fc0448a87eaae1bc64b56, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569182450375427422, guid: 396653fc710fc0448a87eaae1bc64b56, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8670541841793705811, guid: 396653fc710fc0448a87eaae1bc64b56, type: 3}
       propertyPath: m_RootOrder
       value: 5
