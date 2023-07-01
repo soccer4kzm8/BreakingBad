@@ -17,9 +17,10 @@ public class PlayerMove : MonoBehaviour
 
     private IInputEventProviders _playerInput;
 
-    private GameObject _currentItem;
-
-    private bool _isHoldingItem;
+    /// <summary>
+    /// 現在持っているアイテム
+    /// </summary>
+    private GameObject _currentItem = null;
 
     /// <summary>
     /// 拾い上げられたアイテムの位置
@@ -84,13 +85,13 @@ public class PlayerMove : MonoBehaviour
     {
         if (catchAndReleaseInput == false) return;
 
-        if(_isHoldingItem == true)
+        if(_currentItem == null)
         {
-            ReleaseItem();
+            CatchItem();
         }
         else
         {
-            CatchItem();
+            ReleaseItem();
         }
     }
     /// <summary>
@@ -103,14 +104,11 @@ public class PlayerMove : MonoBehaviour
 
         if (hit.collider.CompareTag("Item") == false) return;
 
-        _isHoldingItem = true;
         _currentItem = hit.collider.gameObject;
         _currentItem.transform.SetParent(transform);
         _currentItem.transform.localPosition = _caughtItemPosition;
-        var rigidbody = _currentItem.GetComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
-        var collider = _currentItem.GetComponent<Collider>();
-        collider.enabled = false;
+        _currentItem.GetComponent<Rigidbody>().isKinematic = true;
+        _currentItem.GetComponent<Collider>().enabled = false;
     }
 
     /// <summary>
@@ -119,12 +117,9 @@ public class PlayerMove : MonoBehaviour
     private void ReleaseItem()
     {
         // アイテムを離す処理
-        _isHoldingItem = false;
         _currentItem.transform.SetParent(null);
-        var rigidbody = _currentItem.GetComponent<Rigidbody>();
-        rigidbody.isKinematic = false;
-        var collider = _currentItem.GetComponent<Collider>();
-        collider.enabled = true;
+        _currentItem.GetComponent<Rigidbody>().isKinematic = false;
+        _currentItem.GetComponent<Collider>().enabled = true;
         _currentItem = null;
     }
 }

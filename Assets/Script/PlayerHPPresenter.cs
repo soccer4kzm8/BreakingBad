@@ -24,7 +24,7 @@ public class PlayerHPPresenter : MonoBehaviour
     /// <summary>
     /// 最大HP
     /// </summary>
-    private const int MAX_HP = 10;
+    private const int MAX_HP = 180;
 
     /// <summary>
     /// 1回のダメージで受けるダメージ
