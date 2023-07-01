@@ -103,8 +103,10 @@ public class PlayerMove : MonoBehaviour
         _currentItem = hit.collider.gameObject;
         _currentItem.transform.SetParent(transform);
         _currentItem.transform.localPosition = _caughtItemPosition;
-        var rigidBody = _currentItem.GetComponent<Rigidbody>();
-        rigidBody.isKinematic = true;
+        var rigidbody = _currentItem.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+        var collider = _currentItem.GetComponent<Collider>();
+        collider.enabled = false;
     }
 
     /// <summary>
@@ -115,8 +117,10 @@ public class PlayerMove : MonoBehaviour
         // ÉAÉCÉeÉÄÇó£Ç∑èàóù
         _isHoldingItem = false;
         _currentItem.transform.SetParent(null);
-        var rigidBody = _currentItem.GetComponent<Rigidbody>();
-        rigidBody.isKinematic = false;
+        var rigidbody = _currentItem.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        var collider = _currentItem.GetComponent<Collider>();
+        collider.enabled = true;
         _currentItem = null;
     }
 }
