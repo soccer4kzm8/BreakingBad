@@ -34,6 +34,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private const float RAYCAST_MAX_DISTANCE = 2f;
     #endregion ’è”
+
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();

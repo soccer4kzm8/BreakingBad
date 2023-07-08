@@ -5,6 +5,7 @@ public class ItemHPPresenter : MonoBehaviour
 {
     #region SerializeField
     [SerializeField] private HPView _hPView;
+    [SerializeField] private Transform _rayOrigin;
     private IItemHPModel _itemHPModel;
     #endregion SerializeField
 
@@ -30,6 +31,11 @@ public class ItemHPPresenter : MonoBehaviour
     /// 1‰ñ‚ÅŽó‚¯‚é‰ñ•œ‚·‚é—Ê
     /// </summary>
     private const int RECOVERY = 1;
+
+    /// <summary>
+    /// Raycast‚ÌmaxDistance
+    /// </summary>
+    private const float RAYCAST_MAX_DISTANCE = 500f;
     #endregion ’è”
 
     private void Start()
@@ -40,6 +46,11 @@ public class ItemHPPresenter : MonoBehaviour
 
     private void Update()
     {
+        // ‹ß‚­‚É‚ ‚éƒAƒCƒeƒ€‚ðŽæ“¾
+        if (Physics.Raycast(_rayOrigin.position, Vector3.down, out RaycastHit hit, RAYCAST_MAX_DISTANCE) == false) return;
+
+        if (hit.collider.CompareTag("Fire") == false) return;
+
         _currentTime += Time.deltaTime;
 
         if (_currentTime > _span)
