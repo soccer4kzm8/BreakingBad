@@ -1,11 +1,12 @@
 using UnityEngine;
 using UniRx;
+using UniRx.Triggers;
 
 public class ItemHPPresenter : MonoBehaviour
 {
     #region SerializeField
     [SerializeField] private HPView _hPView;
-    [SerializeField] private Transform _rayOrigin;
+    [SerializeField] private GameObject _item;
     private IItemHPModel _itemHPModel;
     #endregion SerializeField
 
@@ -42,22 +43,18 @@ public class ItemHPPresenter : MonoBehaviour
     {
         _itemHPModel = new HPModel(MAX_HP, 0);
         _itemHPModel.HP.Subscribe(_ => _hPView.SetGuage(_itemHPModel.MaxHP, _itemHPModel.HP.Value)).AddTo(this);
-    }
+        _item.OnCollisionStayAsObservable()
+            .Where(collision => collision.collider.CompareTag("Fire"))
+            .Subscribe(_ =>
+            {
+                _currentTime += Time.deltaTime;
 
-    private void Update()
-    {
-        // ‹ß‚­‚É‚ ‚éƒAƒCƒeƒ€‚ðŽæ“¾
-        if (Physics.Raycast(_rayOrigin.position, Vector3.down, out RaycastHit hit, RAYCAST_MAX_DISTANCE) == false) return;
-
-        if (hit.collider.CompareTag("Fire") == false) return;
-
-        _currentTime += Time.deltaTime;
-
-        if (_currentTime > _span)
-        {
-            _itemHPModel.GetRecovery(RECOVERY);
-            _currentTime = 0f;
-        }
+                if (_currentTime > _span)
+                {
+                    _itemHPModel.GetRecovery(RECOVERY);
+                    _currentTime = 0f;
+                }
+            }).AddTo(this);
     }
 
     /// <summary>

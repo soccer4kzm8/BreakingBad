@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8670541841793705809}
   - component: {fileID: 8670541841793705822}
   - component: {fileID: 8670541841793705823}
+  - component: {fileID: 4907090285258283937}
   m_Layer: 0
   m_Name: Item
   m_TagString: Item
@@ -147,6 +148,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &4907090285258283937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670541841793705820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1a4311128068441ac89a440535a7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7132790393356212444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -289,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hPView: {fileID: 4569182449116889634}
-  _rayOrigin: {fileID: 4850693238957079180}
+  _item: {fileID: 8670541841793705820}
 --- !u!224 &4569182449550127678 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6743080688438913762, guid: cfae29c565947404eb379b184ad41555, type: 3}
