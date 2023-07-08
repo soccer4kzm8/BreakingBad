@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 8670541841793705809}
   - component: {fileID: 8670541841793705822}
   - component: {fileID: 8670541841793705823}
-  - component: {fileID: 4907090285258283937}
   m_Layer: 0
   m_Name: Item
   m_TagString: Item
@@ -148,18 +147,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!114 &4907090285258283937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8670541841793705820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1a4311128068441ac89a440535a7e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7132790393356212444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,6 +165,18 @@ PrefabInstance:
     - target: {fileID: 6743080687559204226, guid: cfae29c565947404eb379b184ad41555, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743080687559204229, guid: cfae29c565947404eb379b184ad41555, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743080688014007034, guid: cfae29c565947404eb379b184ad41555, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743080688014007036, guid: cfae29c565947404eb379b184ad41555, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6743080688438913762, guid: cfae29c565947404eb379b184ad41555, type: 3}
       propertyPath: m_Pivot.x
@@ -269,6 +268,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6743080688438913764, guid: cfae29c565947404eb379b184ad41555, type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743080688587685722, guid: cfae29c565947404eb379b184ad41555, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743080688587685724, guid: cfae29c565947404eb379b184ad41555, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743080688654505572, guid: cfae29c565947404eb379b184ad41555, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

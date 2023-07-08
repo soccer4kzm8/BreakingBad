@@ -32,17 +32,14 @@ public class ItemHPPresenter : MonoBehaviour
     /// 1回で受ける回復する量
     /// </summary>
     private const int RECOVERY = 1;
-
-    /// <summary>
-    /// RaycastのmaxDistance
-    /// </summary>
-    private const float RAYCAST_MAX_DISTANCE = 500f;
     #endregion 定数
 
     private void Start()
     {
         _itemHPModel = new HPModel(MAX_HP, 0);
+        // HPが変化したらゲージに反映
         _itemHPModel.HP.Subscribe(_ => _hPView.SetGuage(_itemHPModel.MaxHP, _itemHPModel.HP.Value)).AddTo(this);
+        // Fireに当たっている間は、アイテム体力の回復を行う
         _item.OnCollisionStayAsObservable()
             .Where(collision => collision.collider.CompareTag("Fire"))
             .Subscribe(_ =>
@@ -55,6 +52,10 @@ public class ItemHPPresenter : MonoBehaviour
                     _currentTime = 0f;
                 }
             }).AddTo(this);
+        // Fireに触れたらゲージの表示
+        _item.OnCollisionEnterAsObservable()
+            .Where(collision => collision.collider.CompareTag("Fire"))
+            .Subscribe(_ => _hPView.SetInvisible(true)).AddTo(this);
     }
 
     /// <summary>

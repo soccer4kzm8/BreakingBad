@@ -180,6 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpGuage: {fileID: 6743080688014007036}
+  _background: {fileID: 6743080688587685724}
+  _fill: {fileID: 6743080687559204229}
 --- !u!1 &6743080688438913763
 GameObject:
   m_ObjectHideFlags: 0
