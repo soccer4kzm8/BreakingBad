@@ -34,7 +34,6 @@ public class HPView : MonoBehaviour
     /// <param name="active"></param>
     public void SetInvisible(bool active)
     {
-        Debug.LogError("“ü‚Á‚½");
         _background.enabled = active;
         _fill.enabled = active;
     }
