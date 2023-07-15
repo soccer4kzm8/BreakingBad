@@ -4,32 +4,32 @@ using UnityEngine.UI;
 public class HPView : MonoBehaviour
 {
     /// <summary>
-    /// ƒXƒ‰ƒCƒ_[–{‘Ì
+    /// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼æœ¬ä½“
     /// </summary>
     [SerializeField] private Slider _hpGuage;
 
     /// <summary>
-    /// ƒQ[ƒW”wŒi
+    /// ã‚²ãƒ¼ã‚¸èƒŒæ™¯
     /// </summary>
     [SerializeField] private Image _background;
 
     /// <summary>
-    /// ƒQ[ƒW–„‚Ü‚é•”•ª‚ÌƒCƒ[ƒW
+    /// ã‚²ãƒ¼ã‚¸åŸ‹ã¾ã‚‹éƒ¨åˆ†ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     /// </summary>
     [SerializeField] private Image _fill;
 
     /// <summary>
-    /// HPƒQ[ƒW‚Ìİ’è
+    /// HPã‚²ãƒ¼ã‚¸ã®è¨­å®š
     /// </summary>
-    /// <param name="maxHP">Å‘åHP</param>
-    /// <param name="hp">c‚Á‚Ä‚¢‚éHP</param>
+    /// <param name="maxHP">æœ€å¤§HP</param>
+    /// <param name="hp">æ®‹ã£ã¦ã„ã‚‹HP</param>
     public void SetGuage(int maxHP, float hp)
     {
         _hpGuage.value = hp / maxHP;
     }
 
     /// <summary>
-    /// ƒQ[ƒW‚Ì•\¦E”ñ•\¦
+    /// ã‚²ãƒ¼ã‚¸ã®è¡¨ç¤ºãƒ»éè¡¨ç¤º
     /// </summary>
     /// <param name="active"></param>
     public void SetInvisible(bool active)

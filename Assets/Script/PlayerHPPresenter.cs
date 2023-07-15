@@ -8,29 +8,29 @@ public class PlayerHPPresenter : MonoBehaviour
     private IPlayerHPModel _playerHPModel;
     #endregion SerializeField
 
-    #region private�ϐ�
+    #region private変数
     /// <summary>
-    /// �_���[�W���󂯂�Ԋu
+    /// ダメージを受ける間隔
     /// </summary>
     private readonly float _span = 1f;
 
     /// <summary>
-    /// �_���[�W���󂯂Ă��牽�b�o������
+    /// ダメージを受けてから何秒経ったか
     /// </summary>
     private float _currentTime = 0f;
-    #endregion private�ϐ�
+    #endregion private変数
 
-    #region �萔
+    #region 定数
     /// <summary>
-    /// �ő�HP
+    /// 最大HP
     /// </summary>
     private const int MAX_HP = 180;
 
     /// <summary>
-    /// 1��̃_���[�W�Ŏ󂯂�_���[�W
+    /// 1回のダメージで受けるダメージ
     /// </summary>
     private const int DAMAGE = 1;
-    #endregion �萔
+    #endregion 定数
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class PlayerHPPresenter : MonoBehaviour
     }
 
     /// <summary>
-    /// �j������
+    /// 破棄処理
     /// </summary>
     private void OnDestroy()
     {

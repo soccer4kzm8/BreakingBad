@@ -1,8 +1,8 @@
 public interface IItemHPModel : IHPModel
 {
     /// <summary>
-    /// ‰ñ•œ‚·‚é‚Ìˆ—
+    /// å›å¾©ã™ã‚‹æ™‚ã®å‡¦ç†
     /// </summary>
-    /// <param name="increasePoint">‘‚â‚·—Ê</param>
+    /// <param name="increasePoint">å¢—ã‚„ã™é‡</param>
     void GetRecovery(int increasePoint);
 }

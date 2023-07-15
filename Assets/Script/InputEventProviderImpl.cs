@@ -3,7 +3,7 @@ using UnityEngine;
 public class InputEventProviderImpl : IInputEventProviders
 {
     /// <summary>
-    /// …•½•ûŒü‚Ì“ü—Í
+    /// æ°´å¹³æ–¹å‘ã®å…¥åŠ›
     /// </summary>
     /// <returns></returns>
     public float GetHorizontalInput()
@@ -12,7 +12,7 @@ public class InputEventProviderImpl : IInputEventProviders
     }
 
     /// <summary>
-    /// ‚’¼•ûŒü‚Ì“ü—Í
+    /// å‚ç›´æ–¹å‘ã®å…¥åŠ›
     /// </summary>
     /// <returns></returns>
     public float GetVerticalInput()
@@ -21,7 +21,7 @@ public class InputEventProviderImpl : IInputEventProviders
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğ‚¿ã‚°‚éE•ú‚·‚Ì“ü—Í
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã¡ä¸Šã’ã‚‹ãƒ»æ”¾ã™ã®å…¥åŠ›
     /// </summary>
     /// <returns></returns>
     public bool GetCatchAndReleaseInput()

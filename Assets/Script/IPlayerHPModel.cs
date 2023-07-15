@@ -1,8 +1,8 @@
 public interface IPlayerHPModel : IHPModel
 {
     /// <summary>
-    /// ƒ_ƒ[ƒWó‚¯‚½‚Ìˆ—
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸å—ã‘ãŸæ™‚ã®å‡¦ç†
     /// </summary>
-    /// <param name="decreasePoint">Œ¸‚ç‚·—Ê</param>
+    /// <param name="decreasePoint">æ¸›ã‚‰ã™é‡</param>
     void GetDamage(int decreasePoint);
 }

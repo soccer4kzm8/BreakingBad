@@ -1,19 +1,19 @@
 public interface IInputEventProviders
 {
     /// <summary>
-    /// …•½•ûŒü‚Ì“ü—Í
+    /// æ°´å¹³æ–¹å‘ã®å…¥åŠ›
     /// </summary>
     /// <returns></returns>
     float GetHorizontalInput();
 
     /// <summary>
-    /// ‚’¼•ûŒü‚Ì“ü—Í
+    /// å‚ç›´æ–¹å‘ã®å…¥åŠ›
     /// </summary>
     /// <returns></returns>
     float GetVerticalInput();
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğ‚¿ã‚°‚éE•ú‚·‚Ì“ü—Í
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã¡ä¸Šã’ã‚‹ãƒ»æ”¾ã™ã®å…¥åŠ›
     /// </summary>
     /// <returns></returns>
     bool GetCatchAndReleaseInput();

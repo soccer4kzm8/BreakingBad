@@ -10,36 +10,36 @@ public class ItemHPPresenter : MonoBehaviour
     private IItemHPModel _itemHPModel;
     #endregion SerializeField
 
-    #region private•Ï”
+    #region privateå¤‰æ•°
     /// <summary>
-    /// ƒ_ƒ[ƒW‚ğó‚¯‚éŠÔŠu
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹é–“éš”
     /// </summary>
     private readonly float _span = 1f;
 
     /// <summary>
-    /// ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚©‚ç‰½•bŒo‚Á‚½‚©
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã‹ã‚‰ä½•ç§’çµŒã£ãŸã‹
     /// </summary>
     private float _currentTime = 0f;
-    #endregion private•Ï”
+    #endregion privateå¤‰æ•°
 
-    #region ’è”
+    #region å®šæ•°
     /// <summary>
-    /// Å‘åHP
+    /// æœ€å¤§HP
     /// </summary>
     private const int MAX_HP = 20;
 
     /// <summary>
-    /// 1‰ñ‚Åó‚¯‚é‰ñ•œ‚·‚é—Ê
+    /// 1å›ã§å—ã‘ã‚‹å›å¾©ã™ã‚‹é‡
     /// </summary>
     private const int RECOVERY = 1;
-    #endregion ’è”
+    #endregion å®šæ•°
 
     private void Start()
     {
         _itemHPModel = new HPModel(MAX_HP, 0);
-        // HP‚ª•Ï‰»‚µ‚½‚çƒQ[ƒW‚É”½‰f
+        // HPãŒå¤‰åŒ–ã—ãŸã‚‰ã‚²ãƒ¼ã‚¸ã«åæ˜ 
         _itemHPModel.HP.Subscribe(_ => _hPView.SetGuage(_itemHPModel.MaxHP, _itemHPModel.HP.Value)).AddTo(this);
-        // Fire‚É“–‚½‚Á‚Ä‚¢‚éŠÔ‚ÍAƒAƒCƒeƒ€‘Ì—Í‚Ì‰ñ•œ‚ğs‚¤
+        // Fireã«å½“ãŸã£ã¦ã„ã‚‹é–“ã¯ã€ã‚¢ã‚¤ãƒ†ãƒ ä½“åŠ›ã®å›å¾©ã‚’è¡Œã†
         _item.OnCollisionStayAsObservable()
             .Where(collision => collision.collider.CompareTag("Fire"))
             .Subscribe(_ =>
@@ -52,14 +52,14 @@ public class ItemHPPresenter : MonoBehaviour
                     _currentTime = 0f;
                 }
             }).AddTo(this);
-        // Fire‚ÉG‚ê‚½‚çƒQ[ƒW‚Ì•\¦
+        // Fireã«è§¦ã‚ŒãŸã‚‰ã‚²ãƒ¼ã‚¸ã®è¡¨ç¤º
         _item.OnCollisionEnterAsObservable()
             .Where(collision => collision.collider.CompareTag("Fire"))
             .Subscribe(_ => _hPView.SetInvisible(true)).AddTo(this);
     }
 
     /// <summary>
-    /// ”jŠüˆ—
+    /// ç ´æ£„å‡¦ç†
     /// </summary>
     private void OnDestroy()
     {

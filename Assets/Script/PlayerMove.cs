@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    #region private•Ï”
+    #region privateå¤‰æ•°
     /// <summary>
-    /// “®‚­‘¬‚³
+    /// å‹•ãé€Ÿã•
     /// </summary>
     private readonly float _moveSpeed = 5f;
 
     /// <summary>
-    /// ‰ñ“]‘¬“x
+    /// å›è»¢é€Ÿåº¦
     /// </summary>
     private readonly float _rotationSpeed = 3600f;
 
@@ -18,22 +18,22 @@ public class PlayerMove : MonoBehaviour
     private IInputEventProviders _playerInput;
 
     /// <summary>
-    /// Œ»İ‚Á‚Ä‚¢‚éƒAƒCƒeƒ€
+    /// ç¾åœ¨æŒã£ã¦ã„ã‚‹ã‚¢ã‚¤ãƒ†ãƒ 
     /// </summary>
     private GameObject _currentItem = null;
 
     /// <summary>
-    /// E‚¢ã‚°‚ç‚ê‚½ƒAƒCƒeƒ€‚ÌˆÊ’u
+    /// æ‹¾ã„ä¸Šã’ã‚‰ã‚ŒãŸã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®
     /// </summary>
     private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
-    #endregion private•Ï”
+    #endregion privateå¤‰æ•°
 
-    #region ’è”
+    #region å®šæ•°
     /// <summary>
-    /// Raycast‚ÌmaxDistance
+    /// Raycastã®maxDistance
     /// </summary>
     private const float RAYCAST_MAX_DISTANCE = 2f;
-    #endregion ’è”
+    #endregion å®šæ•°
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        // ƒL[‚Ì“ü—Í‚ğæ“¾
+        // ã‚­ãƒ¼ã®å…¥åŠ›ã‚’å–å¾—
         bool catchAndReleaseInput = _playerInput.GetCatchAndReleaseInput();
 
         CatchAndReleaseItem(catchAndReleaseInput);
@@ -51,7 +51,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ƒL[‚Ì“ü—Í‚ğæ“¾
+        // ã‚­ãƒ¼ã®å…¥åŠ›ã‚’å–å¾—
         float horizontalInput = _playerInput.GetHorizontalInput();
         float verticalInput = _playerInput.GetVerticalInput();
 
@@ -59,19 +59,19 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ˆÚ“®‚Æ‰ñ“]
+    /// ç§»å‹•ã¨å›è»¢
     /// </summary>
     /// <param name="horizontalInput"></param>
     /// <param name="verticalInput"></param>
     private void Move(float horizontalInput, float verticalInput)
     {
-        // “ü—ÍƒxƒNƒgƒ‹‚ğ³‹K‰»
+        // å…¥åŠ›ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
         Vector3 movementDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-        // ˆÚ“®—Ê
+        // ç§»å‹•é‡
         Vector3 movement = movementDirection * _moveSpeed;
         _bodyRigidbody.velocity = movement;
 
-        // ‰ñ“]ˆ—
+        // å›è»¢å‡¦ç†
         if (movement == Vector3.zero) return;
 
         Quaternion toRotation = Quaternion.LookRotation(movement);
@@ -79,7 +79,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğE‚¤E•ú‚·
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ‹¾ã†ãƒ»æ”¾ã™
     /// </summary>
     /// <param name="catchAndReleaseInput"></param>
     private void CatchAndReleaseItem(bool catchAndReleaseInput)
@@ -96,11 +96,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğE‚¤
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ‹¾ã†
     /// </summary>
     private void CatchItem()
     {
-        // ‹ß‚­‚É‚ ‚éƒAƒCƒeƒ€‚ğæ“¾
+        // è¿‘ãã«ã‚ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, RAYCAST_MAX_DISTANCE) == false) return;
 
         if (hit.collider.CompareTag("Item") == false) return;
@@ -113,11 +113,11 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğ•ú‚·
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ”¾ã™
     /// </summary>
     private void ReleaseItem()
     {
-        // ƒAƒCƒeƒ€‚ğ—£‚·ˆ—
+        // ã‚¢ã‚¤ãƒ†ãƒ ã‚’é›¢ã™å‡¦ç†
         _currentItem.transform.SetParent(null);
         _currentItem.GetComponent<Rigidbody>().isKinematic = false;
         _currentItem.GetComponent<Collider>().enabled = true;

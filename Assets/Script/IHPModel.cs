@@ -1,19 +1,19 @@
-using UniRx;
+ï»¿using UniRx;
 
 public interface IHPModel
 {
     /// <summary>
-    /// Å‘åHP
+    /// æœ€å¤§HP
     /// </summary>
     int MaxHP { get; }
 
     /// <summary>
-    /// c‚Á‚Ä‚¢‚éHP
+    /// æ®‹ã£ã¦ã„ã‚‹HP
     /// </summary>
     IReadOnlyReactiveProperty<int> HP { get; }
 
     /// <summary>
-    /// ”jŠüˆ—
+    /// ç ´æ£„å‡¦ç†
     /// </summary>
     void OnDestroy();
 }

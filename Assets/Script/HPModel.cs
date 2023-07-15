@@ -3,22 +3,22 @@ using UniRx;
 public class HPModel : IItemHPModel, IPlayerHPModel
 {
     /// <summary>
-    /// Å‘åHP
+    /// æœ€å¤§HP
     /// </summary>
     public int MaxHP { private set; get; }
 
     /// <summary>
-    /// Žc‚Á‚Ä‚¢‚éHP
+    /// æ®‹ã£ã¦ã„ã‚‹HP
     /// </summary>
     public IReadOnlyReactiveProperty<int> HP => _hp;
 
     private readonly IntReactiveProperty _hp = new IntReactiveProperty();
 
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
-    /// <param name="maxHP">Å‘åHP</param>
-    /// <param name="defaultHP">ƒQ[ƒ€ŠJŽn‚ÌHP</param>
+    /// <param name="maxHP">æœ€å¤§HP</param>
+    /// <param name="defaultHP">ã‚²ãƒ¼ãƒ é–‹å§‹ã®HP</param>
     public HPModel(int maxHP, int defaultHP)
     {
         MaxHP = maxHP;
@@ -26,9 +26,9 @@ public class HPModel : IItemHPModel, IPlayerHPModel
     }
 
     /// <summary>
-    /// ƒ_ƒ[ƒWŽó‚¯‚½Žž‚Ìˆ—
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸å—ã‘ãŸæ™‚ã®å‡¦ç†
     /// </summary>
-    /// <param name="decreasePoint">Œ¸‚ç‚·—Ê</param>
+    /// <param name="decreasePoint">æ¸›ã‚‰ã™é‡</param>
     public void GetDamage(int decreasePoint)
     {
         if (_hp.Value < 0) return;
@@ -36,9 +36,9 @@ public class HPModel : IItemHPModel, IPlayerHPModel
     }
 
     /// <summary>
-    /// ‰ñ•œ‚·‚é‚Æ‚«‚Ìˆ—
+    /// å›žå¾©ã™ã‚‹ã¨ãã®å‡¦ç†
     /// </summary>
-    /// <param name="decreasePoint">‘‚â‚·—Ê</param>
+    /// <param name="decreasePoint">å¢—ã‚„ã™é‡</param>
     public void GetRecovery(int increasePoint)
     {
         if (_hp.Value >= MaxHP) return;
@@ -46,7 +46,7 @@ public class HPModel : IItemHPModel, IPlayerHPModel
     }
 
     /// <summary>
-    /// ”jŠüˆ—
+    /// ç ´æ£„å‡¦ç†
     /// </summary>
     public void OnDestroy()
     {
