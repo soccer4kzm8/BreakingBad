@@ -739,7 +739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5927988056799805242, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5927988056799805242, guid: 3bf127be03cd45d48bfade06daddcc34, type: 3}
       propertyPath: m_LocalPosition.x
@@ -883,7 +883,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1202842168
 Rigidbody:
@@ -985,6 +985,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
+--- !u!1001 &2123325326
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2463021289336297043, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_Name
+      value: Item_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463021289336297052, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283838160260871249, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283838160260871249, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0d1bc558f3b8a24aa10ab772f4070ea, type: 3}
 --- !u!1001 &4947301744232217895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1067,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8670541841793705811, guid: 396653fc710fc0448a87eaae1bc64b56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8670541841793705811, guid: 396653fc710fc0448a87eaae1bc64b56, type: 3}
       propertyPath: m_LocalPosition.z
