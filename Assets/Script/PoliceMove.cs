@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UniRx;
 
 public class PoliceMove : MonoBehaviour
 {
     #region SerializeField
     [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private PoliceCollisionTriggerEventProviderImpl _policeCollisionTriggerEventProvider;
     #endregion SerializeField
 
     #region private変数
@@ -41,6 +43,10 @@ public class PoliceMove : MonoBehaviour
 
     private void Start()
     {
+        _policeCollisionTriggerEventProvider.InSight.Subscribe(isInSight => 
+        {
+            _navMeshAgent.isStopped = isInSight;
+        }).AddTo(this);
         _currentTime = _span;
     }
 

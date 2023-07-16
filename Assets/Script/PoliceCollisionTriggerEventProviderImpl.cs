@@ -42,6 +42,12 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
                     _inSight.Value = false;
                 }
             }).AddTo(this);
+        _sightRange.OnTriggerExitAsObservable()
+            .Where(_ => _inSight.Value == true)
+            .Subscribe(collider =>
+            {
+                _inSight.Value = false;
+            }).AddTo(this);
     }
 
     /// <summary>
@@ -54,7 +60,6 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
     {
         Vector3 posDelta = collider.transform.position - this.transform.position;
         float targetAngle = Vector3.Angle(this.transform.forward, posDelta);
-        Debug.LogError(targetAngle);
         if (targetAngle <= sightAngle)
         {
             return true;

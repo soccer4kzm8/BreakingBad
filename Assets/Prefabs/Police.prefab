@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 3518268800986885789}
+  _policeCollisionTriggerEventProvider: {fileID: 7797119956152119954}
 --- !u!114 &7797119956152119954
 MonoBehaviour:
   m_ObjectHideFlags: 0
