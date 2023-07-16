@@ -52,8 +52,8 @@ public class PoliceMove : MonoBehaviour
 
     private void Update()
     {
+        if (_policeCollisionTriggerEventProvider.InSight.Value == true) return;
         _currentTime += Time.deltaTime;
-
         if (_currentTime > _span)
         {
             Vector3 randomPos = new Vector3(Random.Range(_stageXMinRange, _stageXMaxRange), 0, Random.Range(_stageZMinRange, _stageZMaxRange));
