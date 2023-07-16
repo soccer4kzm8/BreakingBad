@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -18,6 +16,8 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
     /// 視界内に敵が居るかを監視
     /// </summary>
     private readonly ReactiveProperty<bool> _inSight = new ReactiveProperty<bool>();
+
+    private float _sightAngle = 45f;
     #endregion private変数
 
     #region public変数
@@ -33,7 +33,7 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
             .Where(collider => collider.CompareTag("Player") == true)
             .Subscribe(collider =>
             {
-                if(InSightCheck(collider, 45f) == true)
+                if(InSightCheck(collider, _sightAngle) == true)
                 {
                     _inSight.Value = true;
                 }
