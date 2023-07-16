@@ -1056,6 +1056,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3518268800986885788, guid: a7fbd2fff9bece8439bdbc1947d0b4c6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3518268800986885795, guid: a7fbd2fff9bece8439bdbc1947d0b4c6, type: 3}
       propertyPath: m_Name
       value: Police
@@ -1066,7 +1070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518268800986885799, guid: a7fbd2fff9bece8439bdbc1947d0b4c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.81
+      value: 14.2
       objectReference: {fileID: 0}
     - target: {fileID: 3518268800986885799, guid: a7fbd2fff9bece8439bdbc1947d0b4c6, type: 3}
       propertyPath: m_LocalPosition.y
