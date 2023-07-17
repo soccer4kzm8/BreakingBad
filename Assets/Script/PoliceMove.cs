@@ -41,6 +41,13 @@ public class PoliceMove : MonoBehaviour
     private float _stageZMaxRange = 13f;
     #endregion private 変数
 
+    #region 定数
+    /// <summary>
+    /// 首振りスピード
+    /// </summary>
+    private const float ROTATION_SPEED = 0.1f;
+    #endregion 定数
+
     private void Start()
     {
         _policeCollisionTriggerEventProvider.InSight.Subscribe(isInSight => 
@@ -52,7 +59,18 @@ public class PoliceMove : MonoBehaviour
 
     private void Update()
     {
-        if (_policeCollisionTriggerEventProvider.InSight.Value == true) return;
+        if (_policeCollisionTriggerEventProvider.InSight.Value == true)
+        {
+            if (_policeCollisionTriggerEventProvider.InSightObj == null) return;
+
+            // ターゲット方向のベクトルを取得
+            Vector3 relativePos = _policeCollisionTriggerEventProvider.InSightObj.transform.position - this.transform.position;
+            // 方向を、回転情報に変換
+            Quaternion rotation = Quaternion.LookRotation(relativePos);
+            // 現在の回転情報と、ターゲット方向の回転情報を補完する
+            transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, ROTATION_SPEED);
+            return;
+        }
         _currentTime += Time.deltaTime;
         if (_currentTime > _span)
         {

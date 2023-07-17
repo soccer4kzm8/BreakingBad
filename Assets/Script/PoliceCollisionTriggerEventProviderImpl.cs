@@ -17,6 +17,14 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
     /// </summary>
     private readonly ReactiveProperty<bool> _inSight = new ReactiveProperty<bool>();
 
+    /// <summary>
+    /// 視界内のオブジェクト
+    /// </summary>
+    private GameObject _inSightObj = null;
+
+    /// <summary>
+    /// 視界角度
+    /// </summary>
     private float _sightAngle = 45f;
     #endregion private変数
 
@@ -25,6 +33,11 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
     /// 視界内に敵が居るか
     /// </summary>
     public IReadOnlyReactiveProperty<bool> InSight => _inSight;
+
+    /// <summary>
+    /// 視界内のオブジェクト
+    /// </summary>
+    public GameObject InSightObj => _inSightObj;
     #endregion public変数
 
     private void Start()
@@ -36,10 +49,12 @@ public class PoliceCollisionTriggerEventProviderImpl : MonoBehaviour, IInSightEv
                 if(InSightCheck(collider, _sightAngle) == true)
                 {
                     _inSight.Value = true;
+                    _inSightObj = collider.gameObject;
                 }
                 else
                 {
                     _inSight.Value = false;
+                    _inSightObj = null;
                 }
             }).AddTo(this);
         _sightRange.OnTriggerExitAsObservable()

@@ -1,4 +1,5 @@
 using UniRx;
+using UnityEngine;
 
 public interface IInSightEventProvider
 {
@@ -6,4 +7,9 @@ public interface IInSightEventProvider
     /// 視界内かどうか
     /// </summary>
     IReadOnlyReactiveProperty<bool> InSight { get; }
+
+    /// <summary>
+    /// 視界内のオブジェクト
+    /// </summary>
+    GameObject InSightObj { get; }
 }
