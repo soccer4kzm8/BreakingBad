@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a360b7222406a0147bd7399fdc6400d4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fffe2851f125af04fa20da6b6df14544, type: 2}
     - target: {fileID: 919132149155446097, guid: a360b7222406a0147bd7399fdc6400d4, type: 3}
       propertyPath: m_Name
       value: PestleVariant
