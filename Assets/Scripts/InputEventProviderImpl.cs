@@ -28,4 +28,13 @@ public class InputEventProviderImpl : IInputEventProviders
     {
         return Input.GetKeyDown(KeyCode.E);
     }
+
+    /// <summary>
+    /// アイテムを投げる・混ぜるの入力
+    /// </summary>
+    /// <returns></returns>
+    public bool GetThrowAndMixInput()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
 }

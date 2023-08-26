@@ -17,4 +17,10 @@ public interface IInputEventProviders
     /// </summary>
     /// <returns></returns>
     bool GetCatchAndReleaseInput();
+
+    /// <summary>
+    /// アイテムを投げる・混ぜるの入力
+    /// </summary>
+    /// <returns></returns>
+    bool GetThrowAndMixInput();
 }
