@@ -41,12 +41,12 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// <summary>
     /// プレイヤースピード抑制定数
     /// </summary>
-    private const float VELOCITY_SUPPRESSION = 0.5f;
+    private const float VELOCITY_SUPPRESSION = 0.3f;
 
     /// <summary>
     /// デフォルトの投げる力
     /// </summary>
-    private const float DEFAULT_THROW_FORCE = 3.0f;
+    private const float DEFAULT_THROW_FORCE = 7.0f;
     #endregion 定数
 
     private void Start()
@@ -145,7 +145,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         _currentItem.GetComponent<Collider>().isTrigger = false;
         var rigidBody = _currentItem.GetComponent<Rigidbody>();
         rigidBody.isKinematic = false;
-        Vector3 forceDirection = new Vector3(this.transform.forward.x, 1.0f, this.transform.forward.z);
+        Vector3 forceDirection = new Vector3(this.transform.forward.x, 0.5f, this.transform.forward.z);
         float forceMagnitude = _rigidbody.velocity.magnitude * VELOCITY_SUPPRESSION + DEFAULT_THROW_FORCE;
         Vector3 force = forceMagnitude * forceDirection;
         rigidBody.AddForce(force, ForceMode.Impulse);
