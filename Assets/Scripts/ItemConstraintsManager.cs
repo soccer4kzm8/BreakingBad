@@ -17,7 +17,7 @@ public class ItemConstraintsManager : MonoBehaviour
     {
         if(isOnGround == true)
         {
-            _rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
         else
         {
@@ -31,7 +31,7 @@ public class ItemConstraintsManager : MonoBehaviour
     {
         if (collision.collider.CompareTag("Stage"))
         {
-            _rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 }
