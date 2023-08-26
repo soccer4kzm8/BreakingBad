@@ -48,6 +48,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// </summary>
     private const float DEFAULT_THROW_FORCE = 3.0f;
     #endregion 定数
+
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();
@@ -79,10 +80,18 @@ public class PlayerCatchAndRelease : MonoBehaviour
         {
             _getCatchAndReleaseInput = true;
         }
+        else
+        {
+            _getCatchAndReleaseInput = false;
+        }
 
         if (_playerInput.GetThrowAndMixInput())
         {
             _getThrowAndMixInput = true;
+        }
+        else
+        {
+            _getThrowAndMixInput = false;
         }
     }
 
