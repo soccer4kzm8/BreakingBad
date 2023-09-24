@@ -9,6 +9,11 @@ public class ItemBoxAnimationController : MonoBehaviour
     /// プレイヤー当たり判定Collider
     /// </summary>
     [SerializeField] private GameObject _collider;
+
+    /// <summary>
+    /// ItemBoxアニメーター
+    /// </summary>
+    [SerializeField] private Animator _animator;
     #endregion SerializeField
 
     #region private変数
@@ -20,6 +25,8 @@ public class ItemBoxAnimationController : MonoBehaviour
     private bool _getCatchAndReleaseInput = false;
     #endregion private変数
 
+    private readonly int HashIsInput = Animator.StringToHash("IsInput");
+
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();
@@ -29,6 +36,8 @@ public class ItemBoxAnimationController : MonoBehaviour
             .Where(_ => _getCatchAndReleaseInput == true)
             .Subscribe(collider =>
             {
+                _getCatchAndReleaseInput = false;
+                _animator.SetBool(HashIsInput, true);
                 Debug.Log(collider.gameObject.name);
             }).AddTo(this);
     }
@@ -43,5 +52,12 @@ public class ItemBoxAnimationController : MonoBehaviour
         {
             _getCatchAndReleaseInput = false;
         }
+    }
+
+    public void OnCloseAnimationEnd()
+    {
+        Debug.Log("閉じる");
+
+        _animator.SetBool(HashIsInput, false);
     }
 }

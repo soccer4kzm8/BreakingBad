@@ -7,6 +7,9 @@ ModelImporter:
       74: -7688883885456136753
     second: Armature|CloseBox
   - first:
+      74: -7681441007365279422
+    second: Armature|Default
+  - first:
       74: 6963960178384952303
     second: Armature|OpenBox
   externalObjects: {}
