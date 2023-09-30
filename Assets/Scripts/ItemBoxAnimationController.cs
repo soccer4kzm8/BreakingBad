@@ -2,6 +2,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class ItemBoxAnimationController : MonoBehaviour
 {
     #region SerializeField
@@ -34,12 +35,23 @@ public class ItemBoxAnimationController : MonoBehaviour
         _collider.OnTriggerStayAsObservable()
             .Where(collider => collider.CompareTag("Player"))
             .Where(_ => _getCatchAndReleaseInput == true)
+            .Where(collider => Test(collider))
             .Subscribe(collider =>
             {
-                _getCatchAndReleaseInput = false;
                 _animator.SetBool(HashIsInput, true);
-                Debug.Log(collider.gameObject.name);
             }).AddTo(this);
+    }
+
+    private bool Test(Collider collider)
+    {
+        _getCatchAndReleaseInput = false;
+
+        if (collider.transform.parent.GetComponent<PlayerCatchAndRelease>().CurrentItem == null)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void Update()
@@ -56,8 +68,6 @@ public class ItemBoxAnimationController : MonoBehaviour
 
     public void OnCloseAnimationEnd()
     {
-        Debug.Log("閉じる");
-
         _animator.SetBool(HashIsInput, false);
     }
 }

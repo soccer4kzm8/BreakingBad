@@ -37,6 +37,11 @@ public class PlayerCatchAndRelease : MonoBehaviour
     private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
     #endregion private変数
 
+    /// <summary>
+    /// 現在持っているアイテム
+    /// </summary>
+    public GameObject CurrentItem => _currentItem;
+
     #region 定数
     /// <summary>
     /// プレイヤースピード抑制定数
