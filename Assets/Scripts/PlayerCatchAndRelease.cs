@@ -59,6 +59,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         _playerInput = new InputEventProviderImpl();
         _rigidbody = this.GetComponent<Rigidbody>();
 
+        // アイテム拾う・放す
         _collider.OnTriggerStayAsObservable()
             .Where(collider => collider.CompareTag("Item"))
             .Where(_ => _getCatchAndReleaseInput == true)
@@ -68,6 +69,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
                 CatchAndReleaseItem(collider);
             }).AddTo(this);
 
+        // アイテム投げる
         _collider.OnTriggerStayAsObservable()
             .Where(collider => collider.CompareTag("Item"))
             .Where(_ => _getThrowAndMixInput == true)

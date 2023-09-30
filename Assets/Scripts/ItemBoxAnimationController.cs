@@ -35,23 +35,11 @@ public class ItemBoxAnimationController : MonoBehaviour
         _collider.OnTriggerStayAsObservable()
             .Where(collider => collider.CompareTag("Player"))
             .Where(_ => _getCatchAndReleaseInput == true)
-            .Where(collider => Test(collider))
+            .Where(collider => CheckOpenItemBox(collider))
             .Subscribe(collider =>
             {
                 _animator.SetBool(HashIsInput, true);
             }).AddTo(this);
-    }
-
-    private bool Test(Collider collider)
-    {
-        _getCatchAndReleaseInput = false;
-
-        if (collider.transform.parent.GetComponent<PlayerCatchAndRelease>().CurrentItem == null)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     private void Update()
@@ -64,6 +52,23 @@ public class ItemBoxAnimationController : MonoBehaviour
         {
             _getCatchAndReleaseInput = false;
         }
+    }
+
+    /// <summary>
+    /// アイテムボックスを開くかのチェック
+    /// </summary>
+    /// <param name="collider"></param>
+    /// <returns></returns>
+    private bool CheckOpenItemBox(Collider collider)
+    {
+        _getCatchAndReleaseInput = false;
+
+        if (collider.transform.parent.GetComponent<PlayerCatchAndRelease>().CurrentItem == null)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void OnCloseAnimationEnd()
