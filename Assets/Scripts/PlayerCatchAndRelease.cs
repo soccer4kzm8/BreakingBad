@@ -121,8 +121,9 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// <summary>
     /// アイテムを拾う
     /// </summary>
-    private void CatchItem(Collider collider)
+    public void CatchItem(Collider collider)
     {
+        _getCatchAndReleaseInput = false;
         _currentItem = collider.gameObject;
         _currentItem.transform.SetParent(transform);
         _currentItem.transform.localPosition = _caughtItemPosition;

@@ -15,6 +15,10 @@ public class ItemConstraintsManager : MonoBehaviour
     /// <param name="isHangingInAir"></param>
     public void SetIsItemOnGround(bool isOnGround)
     {
+        if(_rigidbody == null)
+        {
+            _rigidbody = this.GetComponent<Rigidbody>();
+        }
         if(isOnGround == true)
         {
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
