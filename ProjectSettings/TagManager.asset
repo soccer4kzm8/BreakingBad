@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - Stage
   - ItemBox
+  - Wall
   layers:
   - Default
   - TransparentFX

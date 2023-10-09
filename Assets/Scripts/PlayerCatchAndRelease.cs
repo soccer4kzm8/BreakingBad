@@ -75,11 +75,11 @@ public class PlayerCatchAndRelease : MonoBehaviour
             .Where(collider => collider.CompareTag("Item"))
             .Where(_ => _getCatchAndReleaseInput == true)
             .Where(_ => _currentItem != null)
-            .Where(_ => IsInfrontOfItemBox())
-            .Subscribe(_ =>
+            .Where(_ => IsInfrontOfTagObject("ItemBox") == null)
+            .Subscribe(collider =>
             {
                 _getCatchAndReleaseInput = false;
-                ReleaseItem();
+                ReleaseItem(collider);
             }).AddTo(this);
 
         // アイテム投げる
@@ -133,10 +133,19 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// <summary>
     /// アイテムを放す
     /// </summary>
-    private void ReleaseItem()
+    /// <param name="collider">持っているアイテムのコライダー</param>
+    private void ReleaseItem(Collider collider)
     {
-        // アイテムを離す処理
+        var hitCollider = IsInfrontOfTagObject("Wall");
+        if (hitCollider == null) return;
+        
+        // Wall上のグリッドに分けられ箇所に配置
+        var closestPosition = hitCollider.GetComponent<GridSystem>().GetClosestPos(transform.position);
+        var settingPosition = new Vector3(closestPosition.x, closestPosition.y + collider.transform.localScale.y * (collider.transform.localScale.y * 0.5f), closestPosition.z);
+        _currentItem.transform.position = settingPosition;
         _currentItem.GetComponent<Rigidbody>().isKinematic = false;
+        // アイテムが地面に着いている設定
+        _currentItem.GetComponent<ItemConstraintsManager>().SetIsItemOnGround(true);
         _currentItem.GetComponent<Collider>().isTrigger = false;
         _currentItem.transform.SetParent(null);
         _currentItem = null;
@@ -159,21 +168,21 @@ public class PlayerCatchAndRelease : MonoBehaviour
     }
 
     /// <summary>
-    /// アイテムボックスの前に立っているか
+    /// 指定タグオブジェクト前に立っているか
     /// </summary>
+    /// <param name="tagName">指定タグ</param>
     /// <returns></returns>
-    private bool IsInfrontOfItemBox()
+    private Collider IsInfrontOfTagObject(string tagName)
     {
         Vector3 rayOrigin = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        RaycastHit[] hits = Physics.RaycastAll(rayOrigin, this.transform.forward, 100f);
-
+        RaycastHit[] hits = Physics.RaycastAll(rayOrigin, this.transform.forward, 1f);
         foreach (var hit in hits)
         {
-            if (hit.collider.CompareTag("ItemBox"))
+            if (hit.collider.CompareTag(tagName))
             {
-                return false;
+                return hit.collider;
             }
         }
-        return true;
+        return null;
     }
 }

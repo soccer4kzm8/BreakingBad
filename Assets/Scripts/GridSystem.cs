@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
+    #region SerializeField
     /// <summary>
     /// グリッドの行数
     /// </summary>
@@ -16,11 +18,26 @@ public class GridSystem : MonoBehaviour
     /// セルのサイズ
     /// </summary>
     [SerializeField] private float _cellSize;
+    #endregion SerializeField
 
+    #region private変数
     /// <summary>
     /// グリッドの原点位置
     /// </summary>
-    private Vector3 originPosition; // グリッドの原点の位置
+    private Vector3 originPosition;
+
+    /// <summary>
+    /// グリッドの中点リスト
+    /// </summary>
+    private List<Vector3> _cellPositions = new List<Vector3>();
+    #endregion private変数
+
+    #region public変数
+    /// <summary>
+    /// グリッドの中点リスト
+    /// </summary>
+    public List<Vector3> CellPostions => _cellPositions;
+    #endregion public変数
 
     private void Start()
     {
@@ -29,18 +46,47 @@ public class GridSystem : MonoBehaviour
         CreateGrid();
     }
 
+    /// <summary>
+    /// グリッドの作成
+    /// </summary>
     private void CreateGrid()
     {
         for (int i = 0; i < _rows; i++)
         {
             for (int j = 0; j < _columns; j++)
             {
-                Vector3 cellPosition = GetCellPosition(i, j);
-                PlaceItem(cellPosition);
+                _cellPositions.Add(GetCellPosition(i, j));
             }
         }
     }
 
+    /// <summary>
+    /// 指定位置から最も近いグリッドの中点を返す
+    /// </summary>
+    /// <param name="position">指定位置</param>
+    /// <returns></returns>
+    public Vector3 GetClosestPos(Vector3 position)
+    {
+        Vector3 closestPoint = _cellPositions[0];
+        float closestDistance = Vector3.Distance(position, closestPoint);
+        foreach(var cellPosition in _cellPositions)
+        {
+            float distance = Vector3.Distance(position, cellPosition);
+            if(distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPoint = cellPosition;
+            }
+        }
+        return closestPoint;
+    }
+
+    /// <summary>
+    /// セルの中心を取得
+    /// </summary>
+    /// <param name="row">行</param>
+    /// <param name="column">列</param>
+    /// <returns></returns>
     private Vector3 GetCellPosition(int row, int column)
     {
         float xPosition = originPosition.x + (_cellSize * column) + _cellSize / 2;
@@ -50,7 +96,7 @@ public class GridSystem : MonoBehaviour
 
     private void PlaceItem(Vector3 position)
     {
-        //Instantiate(itemPrefab, position, Quaternion.identity);
+        Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere), position, Quaternion.identity);
     }
 
     /// <summary>
@@ -58,7 +104,8 @@ public class GridSystem : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green; // グリッドの色を設定
+        // グリッドの色を設定
+        Gizmos.color = Color.green;
 
         for (int i = 0; i <= _rows; i++)
         {
