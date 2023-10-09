@@ -5,17 +5,17 @@ public class GridSystem : MonoBehaviour
     /// <summary>
     /// グリッドの行数
     /// </summary>
-    [SerializeField] private int rows;
+    [SerializeField] private int _rows;
 
     /// <summary>
     /// グリッドの列数
     /// </summary>
-    [SerializeField] private int columns;
+    [SerializeField] private int _columns;
 
     /// <summary>
     /// セルのサイズ
     /// </summary>
-    [SerializeField] private float cellSize;
+    [SerializeField] private float _cellSize;
 
     /// <summary>
     /// グリッドの原点位置
@@ -24,16 +24,16 @@ public class GridSystem : MonoBehaviour
 
     private void Start()
     {
-        Vector3 offset = new Vector3(-columns * cellSize * 0.5f, cellSize * 0.5f, -rows * cellSize * 0.5f);
+        Vector3 offset = new Vector3(-_columns * _cellSize * 0.5f, _cellSize * 0.5f, -_rows * _cellSize * 0.5f);
         originPosition = transform.position + offset;
         CreateGrid();
     }
 
     private void CreateGrid()
     {
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < _rows; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = 0; j < _columns; j++)
             {
                 Vector3 cellPosition = GetCellPosition(i, j);
                 PlaceItem(cellPosition);
@@ -43,8 +43,8 @@ public class GridSystem : MonoBehaviour
 
     private Vector3 GetCellPosition(int row, int column)
     {
-        float xPosition = originPosition.x + (cellSize * column) + cellSize / 2;
-        float zPosition = originPosition.z + (cellSize * row) + cellSize / 2;
+        float xPosition = originPosition.x + (_cellSize * column) + _cellSize / 2;
+        float zPosition = originPosition.z + (_cellSize * row) + _cellSize / 2;
         return new Vector3(xPosition, originPosition.y, zPosition);
     }
 
@@ -60,19 +60,19 @@ public class GridSystem : MonoBehaviour
     {
         Gizmos.color = Color.green; // グリッドの色を設定
 
-        for (int i = 0; i <= rows; i++)
+        for (int i = 0; i <= _rows; i++)
         {
-            float zPosition = originPosition.z + i * cellSize;
+            float zPosition = originPosition.z + i * _cellSize;
             Vector3 startPos = new Vector3(originPosition.x, originPosition.y, zPosition);
-            Vector3 endPos = new Vector3(originPosition.x + columns * cellSize, originPosition.y, zPosition);
+            Vector3 endPos = new Vector3(originPosition.x + _columns * _cellSize, originPosition.y, zPosition);
             Gizmos.DrawLine(startPos, endPos);
         }
 
-        for (int j = 0; j <= columns; j++)
+        for (int j = 0; j <= _columns; j++)
         {
-            float xPosition = originPosition.x + j * cellSize;
+            float xPosition = originPosition.x + j * _cellSize;
             Vector3 startPos = new Vector3(xPosition, originPosition.y, originPosition.z);
-            Vector3 endPos = new Vector3(xPosition, originPosition.y, originPosition.z + rows * cellSize);
+            Vector3 endPos = new Vector3(xPosition, originPosition.y, originPosition.z + _rows * _cellSize);
             Gizmos.DrawLine(startPos, endPos);
         }
     }
