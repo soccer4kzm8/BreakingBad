@@ -59,14 +59,27 @@ public class PlayerCatchAndRelease : MonoBehaviour
         _playerInput = new InputEventProviderImpl();
         _rigidbody = this.GetComponent<Rigidbody>();
 
-        // アイテム拾う・放す
+        // アイテム拾う
         _collider.OnTriggerStayAsObservable()
             .Where(collider => collider.CompareTag("Item"))
             .Where(_ => _getCatchAndReleaseInput == true)
+            .Where(_ => _currentItem == null)
             .Subscribe(collider =>
             {
                 _getCatchAndReleaseInput = false;
-                CatchAndReleaseItem(collider);
+                CatchItem(collider);
+            }).AddTo(this);
+
+        // アイテム放す
+        _collider.OnTriggerStayAsObservable()
+            .Where(collider => collider.CompareTag("Item"))
+            .Where(_ => _getCatchAndReleaseInput == true)
+            .Where(_ => _currentItem != null)
+            .Where(_ => IsInfrontOfItemBox())
+            .Subscribe(_ =>
+            {
+                _getCatchAndReleaseInput = false;
+                ReleaseItem();
             }).AddTo(this);
 
         // アイテム投げる
@@ -103,22 +116,6 @@ public class PlayerCatchAndRelease : MonoBehaviour
     }
 
     /// <summary>
-    /// アイテムを拾う・放す
-    /// </summary>
-    /// <param name="catchAndReleaseInput"></param>
-    private void CatchAndReleaseItem(Collider collider)
-    {
-        if (_currentItem != null)
-        {
-            ReleaseItem();
-        }
-        else
-        {
-            CatchItem(collider);
-        }
-    }
-
-    /// <summary>
     /// アイテムを拾う
     /// </summary>
     public void CatchItem(Collider collider)
@@ -127,7 +124,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         _currentItem = collider.gameObject;
         _currentItem.transform.SetParent(transform);
         _currentItem.transform.localPosition = _caughtItemPosition;
-        var rigidbody = _currentItem.GetComponent<Rigidbody>().isKinematic = true;
+        _currentItem.GetComponent<Rigidbody>().isKinematic = true;
         // アイテムが地面に着いていない設定
         _currentItem.GetComponent<ItemConstraintsManager>().SetIsItemOnGround(false);
         _currentItem.GetComponent<Collider>().isTrigger = true;
@@ -159,5 +156,24 @@ public class PlayerCatchAndRelease : MonoBehaviour
         rigidBody.AddForce(force, ForceMode.Impulse);
         _currentItem.transform.SetParent(null);
         _currentItem = null;
+    }
+
+    /// <summary>
+    /// アイテムボックスの前に立っているか
+    /// </summary>
+    /// <returns></returns>
+    private bool IsInfrontOfItemBox()
+    {
+        Vector3 rayOrigin = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        RaycastHit[] hits = Physics.RaycastAll(rayOrigin, this.transform.forward, 100f);
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.CompareTag("ItemBox"))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

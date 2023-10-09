@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8494863085414490183, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 89.98021
+      objectReference: {fileID: 0}
     - target: {fileID: -6652725513331149018, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -70,6 +74,22 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
       propertyPath: m_Name
       value: ItemBoxVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
+      propertyPath: m_TagString
+      value: ItemBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327858474078834547, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327858474078834547, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.954469e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98021
       objectReference: {fileID: 0}
     - target: {fileID: 9197014934257257887, guid: 89bc9beb49398b04688fab7016367d33, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -95,20 +115,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: -0.6, z: 0}
---- !u!114 &4899645396268512207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8780159251657918950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e32ae08aabdbd2740856590b3181911b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collider: {fileID: 8780159251657918950}
-  _animator: {fileID: 3113925102486165462}
 --- !u!95 &3113925102486165462
 Animator:
   serializedVersion: 4
@@ -129,3 +135,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4899645396268512207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780159251657918950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32ae08aabdbd2740856590b3181911b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 8780159251657918950}
+  _animator: {fileID: 3113925102486165462}

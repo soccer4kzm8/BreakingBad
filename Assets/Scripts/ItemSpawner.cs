@@ -2,6 +2,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] GameObject _prefab;
