@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class GridModel
 {
+    /// <summary>
+    /// グリッドの中点リスト
+    /// </summary>
     private List<Vector3> _cellPostions;
 
     /// <summary>
     /// グリッド内にアイテムがあるかどうか
     /// </summary>
-    private bool[] _existItem;
+    private string[] _existItem;
     public GridModel(int gridCount, List<Vector3> cellPostions)
     {
-        _existItem = new bool[gridCount];
+        _existItem = new string[gridCount];
         _cellPostions = cellPostions;
     }
 
@@ -20,14 +23,31 @@ public class GridModel
     /// </summary>
     /// <param name="contactX">グリッドとアイテムが接触したx座標</param>
     /// <param name="contactZ">グリッドとアイテムが接触したz座標</param>
-    public void SetItem(float contactX, float contactZ)
+    /// <param name="itemName">アイテム名</param>
+    public void SetItem(float contactX, float contactZ, string itemName)
     {
         for(int i = 0; i < _cellPostions.Count; i++)
         {
             if(contactX == _cellPostions[i].x && contactZ == _cellPostions[i].z)
             {
-                _existItem[i] = true;
+                _existItem[i] = itemName;
             }
         }
+    }
+
+    public void GetItem(string itemName)
+    {
+        for(int i = 0; i < _existItem.Length; i++)
+        {
+            if (_existItem[i] == itemName)
+            {
+                _existItem[i] = null;
+            }
+        }
+
+        //foreach(var i in _existItem)
+        //{
+        //    Debug.Log(i);
+        //}
     }
 }

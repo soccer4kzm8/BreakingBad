@@ -40,6 +40,9 @@ public class GridSystem : MonoBehaviour
 
     private GridModel _gridModel;
 
+    /// <summary>
+    /// グリッド数
+    /// </summary>
     private int _gridCound = 0;
     #endregion private変数
 
@@ -60,7 +63,15 @@ public class GridSystem : MonoBehaviour
             .Where(collision => collision.gameObject.CompareTag("Item"))
             .Subscribe(collision => 
             {
-                _gridModel.SetItem(collision.contacts[0].point.x, collision.contacts[0].point.z);
+                _gridModel.SetItem(collision.contacts[0].point.x, collision.contacts[0].point.z, collision.gameObject.name);
+
+            }).AddTo(this);
+
+        _collider.OnCollisionExitAsObservable()
+            .Where(collision => collision.gameObject.CompareTag("Item"))
+            .Subscribe(collision =>
+            {
+                _gridModel.GetItem(collision.gameObject.name);
 
             }).AddTo(this);
     }
@@ -138,7 +149,5 @@ public class GridSystem : MonoBehaviour
             Gizmos.DrawLine(startPos, endPos);
         }
     }
-
-
 }
 
