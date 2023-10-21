@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
 
 public class GridSystem : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class GridSystem : MonoBehaviour
     /// セルのサイズ
     /// </summary>
     [SerializeField] private float _cellSize;
+
+    /// <summary>
+    /// コライダー
+    /// </summary>
+    [SerializeField] private Collider _collider; 
     #endregion SerializeField
 
     #region private変数
@@ -30,6 +37,10 @@ public class GridSystem : MonoBehaviour
     /// グリッドの中点リスト
     /// </summary>
     private List<Vector3> _cellPositions = new List<Vector3>();
+
+    private GridModel _gridModel;
+
+    private int _gridCound = 0;
     #endregion private変数
 
     #region public変数
@@ -44,6 +55,14 @@ public class GridSystem : MonoBehaviour
         Vector3 offset = new Vector3(-_columns * _cellSize * 0.5f, _cellSize * 0.5f, -_rows * _cellSize * 0.5f);
         originPosition = transform.position + offset;
         CreateGrid();
+        _gridModel = new GridModel(_gridCound, _cellPositions);
+        _collider.OnCollisionEnterAsObservable()
+            .Where(collision => collision.gameObject.CompareTag("Item"))
+            .Subscribe(collision => 
+            {
+                _gridModel.SetItem(collision.contacts[0].point.x, collision.contacts[0].point.z);
+
+            }).AddTo(this);
     }
 
     /// <summary>
@@ -55,6 +74,7 @@ public class GridSystem : MonoBehaviour
         {
             for (int j = 0; j < _columns; j++)
             {
+                _gridCound++;
                 _cellPositions.Add(GetCellPosition(i, j));
             }
         }
@@ -94,11 +114,6 @@ public class GridSystem : MonoBehaviour
         return new Vector3(xPosition, originPosition.y, zPosition);
     }
 
-    private void PlaceItem(Vector3 position)
-    {
-        Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere), position, Quaternion.identity);
-    }
-
     /// <summary>
     /// スクリプトがGameObjectに設定されているとき
     /// </summary>
@@ -123,5 +138,7 @@ public class GridSystem : MonoBehaviour
             Gizmos.DrawLine(startPos, endPos);
         }
     }
+
+
 }
 

@@ -113,3 +113,4 @@ MonoBehaviour:
   _rows: 1
   _columns: 1
   _cellSize: 1
+  _collider: {fileID: 4947301743424391658}
