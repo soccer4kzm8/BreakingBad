@@ -17,11 +17,6 @@ public class PlayerCatchAndRelease : MonoBehaviour
     private Rigidbody _rigidbody;
 
     /// <summary>
-    /// 拾う・放すの入力がされたかどうか
-    /// </summary>
-    private bool _getCatchAndReleaseInput = false;
-
-    /// <summary>
     /// 投げる・混ぜるの入力がされたかどうか
     /// </summary>
     private bool _getThrowAndMixInput = false;
@@ -35,6 +30,11 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// 拾い上げられたアイテムの位置
     /// </summary>
     private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
+
+    /// <summary>
+    /// 接しているアイテムのCollider
+    /// </summary>
+    private Collider _attachItem = null;
     #endregion private変数
 
     /// <summary>
@@ -59,29 +59,6 @@ public class PlayerCatchAndRelease : MonoBehaviour
         _playerInput = new InputEventProviderImpl();
         _rigidbody = this.GetComponent<Rigidbody>();
 
-        // アイテム拾う
-        _collider.OnTriggerStayAsObservable()
-            .Where(collider => collider.CompareTag("Item"))
-            .Where(_ => _getCatchAndReleaseInput == true)
-            .Where(_ => _currentItem == null)
-            .Subscribe(collider =>
-            {
-                _getCatchAndReleaseInput = false;
-                CatchItem(collider);
-            }).AddTo(this);
-
-        // アイテム放す
-        _collider.OnTriggerStayAsObservable()
-            .Where(collider => collider.CompareTag("Item"))
-            .Where(_ => _getCatchAndReleaseInput == true)
-            .Where(_ => _currentItem != null)
-            .Where(_ => IsInfrontOfTagObject("ItemBox") == null)
-            .Subscribe(collider =>
-            {
-                _getCatchAndReleaseInput = false;
-                ReleaseItem(collider);
-            }).AddTo(this);
-
         // アイテム投げる
         _collider.OnTriggerStayAsObservable()
             .Where(collider => collider.CompareTag("Item"))
@@ -96,14 +73,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
 
     private void Update()
     {
-        if (_playerInput.GetCatchAndReleaseInput())
-        {
-            _getCatchAndReleaseInput = true;
-        }
-        else
-        {
-            _getCatchAndReleaseInput = false;
-        }
+        CatchAndRelease();
 
         if (_playerInput.GetThrowAndMixInput())
         {
@@ -115,12 +85,52 @@ public class PlayerCatchAndRelease : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider collider)
+    {
+        if(collider.CompareTag("Item") == true)
+        {
+            _attachItem = collider;
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Item") == true)
+        {
+            _attachItem = null;
+        }
+    }
+
+    /// <summary>
+    /// アイテムを拾う・放すの処理
+    /// </summary>
+    private void CatchAndRelease()
+    {
+        if (_playerInput.GetCatchAndReleaseInput() == false)
+        {
+            return;
+        }
+
+        if(IsInfrontOfTagObject("ItemBox") != null)
+        {
+            return;
+        }
+
+        if (_currentItem == null)
+        {
+            CatchItem(_attachItem);
+        }
+        else
+        {
+            ReleaseItem(_attachItem);
+        }
+    }
+
     /// <summary>
     /// アイテムを拾う
     /// </summary>
     public void CatchItem(Collider collider)
     {
-        _getCatchAndReleaseInput = false;
         _currentItem = collider.gameObject;
         _currentItem.transform.SetParent(transform);
         _currentItem.transform.localPosition = _caughtItemPosition;
