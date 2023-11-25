@@ -27,6 +27,11 @@ public class PlayerCatchAndRelease : MonoBehaviour
     private GameObject _currentItem = null;
 
     /// <summary>
+    /// 現在持っているアイテムID
+    /// </summary>
+    private int _currentItemID = 0;
+
+    /// <summary>
     /// 拾い上げられたアイテムの位置
     /// </summary>
     private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
@@ -116,11 +121,16 @@ public class PlayerCatchAndRelease : MonoBehaviour
             return;
         }
 
+        if(_attachItem == null)
+        {
+            return;
+        }
+
         if (_currentItem == null)
         {
             CatchItem(_attachItem);
         }
-        else
+        else if (IsInfrontOfTagObject("Item") == null)
         {
             ReleaseItem(_attachItem);
         }
@@ -132,6 +142,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
     public void CatchItem(Collider collider)
     {
         _currentItem = collider.gameObject;
+        _currentItemID = _currentItem.GetInstanceID();
         _currentItem.transform.SetParent(transform);
         _currentItem.transform.localPosition = _caughtItemPosition;
         _currentItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -159,6 +170,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         _currentItem.GetComponent<Collider>().isTrigger = false;
         _currentItem.transform.SetParent(null);
         _currentItem = null;
+        _currentItemID = 0;
     }
 
     /// <summary>
@@ -175,19 +187,25 @@ public class PlayerCatchAndRelease : MonoBehaviour
         rigidBody.AddForce(force, ForceMode.Impulse);
         _currentItem.transform.SetParent(null);
         _currentItem = null;
+        _currentItemID = 0;
     }
 
     /// <summary>
-    /// 指定タグオブジェクト前に立っているか
+    /// 指定タグオブジェクト前に立っている場合、指定オブジェクトのColliderを返す
     /// </summary>
     /// <param name="tagName">指定タグ</param>
     /// <returns></returns>
     private Collider IsInfrontOfTagObject(string tagName)
     {
-        Vector3 rayOrigin = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        RaycastHit[] hits = Physics.RaycastAll(rayOrigin, this.transform.forward, 1f);
+        Vector3 rayOrigin = transform.position + transform.up * 1f + transform.forward * 1f;
+        //Debug.DrawRay(rayOrigin, -this.transform.up * 20f, Color.cyan, 2f);
+        RaycastHit[] hits = Physics.RaycastAll(rayOrigin, -this.transform.up, 2f);
         foreach (var hit in hits)
         {
+            if(hit.collider.gameObject.GetInstanceID() == _currentItemID)
+            {
+                continue;
+            }
             if (hit.collider.CompareTag(tagName))
             {
                 return hit.collider;
