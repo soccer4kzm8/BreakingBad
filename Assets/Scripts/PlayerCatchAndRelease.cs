@@ -90,6 +90,10 @@ public class PlayerCatchAndRelease : MonoBehaviour
         {
             CatchItem(_attachItem);
         }
+        else if (IsInfrontOfTagObject("MortarPestle") != null)
+        {
+            ReleaseItem(_attachItem);
+        }
         else if (IsInfrontOfTagObject("Item") == null)
         {
             ReleaseItem(_attachItem);
