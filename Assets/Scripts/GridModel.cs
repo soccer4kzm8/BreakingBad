@@ -29,7 +29,6 @@ public class GridModel
         {
             if (contactPosition == _cellPostions[i])
             {
-                Debug.Log(itemName);
                 _existItem[i] = itemName;
             }
         }
