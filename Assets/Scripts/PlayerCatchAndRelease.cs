@@ -119,9 +119,11 @@ public class PlayerCatchAndRelease : MonoBehaviour
     {
         var hitCollider = IsInfrontOfTagObject("Wall");
         if (hitCollider == null) return;
-        
+
         // Wall上のグリッドに分けられ箇所に配置
-        var closestPosition = hitCollider.GetComponent<GridSystem>().GetClosestPos(transform.position);
+        var gridSystem = hitCollider.GetComponent<GridSystem>();
+        var closestPosition = gridSystem.GetClosestPos(transform.position);
+        gridSystem.SetItem(closestPosition, collider.name);
         var settingPosition = new Vector3(closestPosition.x, closestPosition.y + collider.transform.localScale.y * (collider.transform.localScale.y * 0.5f), closestPosition.z);
         _currentItem.transform.position = settingPosition;
         _currentItem.GetComponent<Rigidbody>().isKinematic = false;

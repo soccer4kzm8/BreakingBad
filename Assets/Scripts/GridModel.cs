@@ -19,22 +19,26 @@ public class GridModel
     }
 
     /// <summary>
-    /// グリッド内にアイテムを設置フラグ
+    /// グリッド内にアイテムを設置
     /// </summary>
-    /// <param name="contactX">グリッドとアイテムが接触したx座標</param>
-    /// <param name="contactZ">グリッドとアイテムが接触したz座標</param>
+    /// <param name="contactPosition">アイテムがグリッドに接触した位置</param>
     /// <param name="itemName">アイテム名</param>
-    public void SetItem(float contactX, float contactZ, string itemName)
+    public void SetItem(Vector3 contactPosition, string itemName)
     {
         for(int i = 0; i < _cellPostions.Count; i++)
         {
-            if(contactX == _cellPostions[i].x && contactZ == _cellPostions[i].z)
+            if (contactPosition == _cellPostions[i])
             {
+                Debug.Log(itemName);
                 _existItem[i] = itemName;
             }
         }
     }
 
+    /// <summary>
+    /// グリッド内からアイテムがなくなった時、グリッドを空にする
+    /// </summary>
+    /// <param name="itemName"></param>
     public void GetItem(string itemName)
     {
         for(int i = 0; i < _existItem.Length; i++)
@@ -44,10 +48,5 @@ public class GridModel
                 _existItem[i] = null;
             }
         }
-
-        //foreach(var i in _existItem)
-        //{
-        //    Debug.Log(i);
-        //}
     }
 }

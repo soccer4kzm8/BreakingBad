@@ -1509,17 +1509,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1113707335733576273, guid: 50edc59f03f06f14c839899cea7f54f2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3929064214362804093, guid: 50edc59f03f06f14c839899cea7f54f2, type: 3}
       propertyPath: m_Name
       value: MortarPestle
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929064214362804093, guid: 50edc59f03f06f14c839899cea7f54f2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6164793299503422015, guid: 50edc59f03f06f14c839899cea7f54f2, type: 3}
       propertyPath: m_RootOrder

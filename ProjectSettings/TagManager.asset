@@ -9,6 +9,7 @@ TagManager:
   - Stage
   - ItemBox
   - Wall
+  - MortarPestle
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UniRx;
-using UniRx.Triggers;
 
 public class GridSystem : MonoBehaviour
 {
@@ -59,21 +57,15 @@ public class GridSystem : MonoBehaviour
         originPosition = transform.position + offset;
         CreateGrid();
         _gridModel = new GridModel(_gridCound, _cellPositions);
-        _collider.OnCollisionEnterAsObservable()
-            .Where(collision => collision.gameObject.CompareTag("Item"))
-            .Subscribe(collision => 
-            {
-                _gridModel.SetItem(collision.contacts[0].point.x, collision.contacts[0].point.z, collision.gameObject.name);
+    }
 
-            }).AddTo(this);
-
-        _collider.OnCollisionExitAsObservable()
-            .Where(collision => collision.gameObject.CompareTag("Item"))
-            .Subscribe(collision =>
-            {
-                _gridModel.GetItem(collision.gameObject.name);
-
-            }).AddTo(this);
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Item") == false)
+        {
+            return;
+        }
+        _gridModel.GetItem(collision.gameObject.name);
     }
 
     /// <summary>
@@ -89,6 +81,25 @@ public class GridSystem : MonoBehaviour
                 _cellPositions.Add(GetCellPosition(i, j));
             }
         }
+    }
+
+    /// <summary>
+    /// グリッドにアイテムを設置する処理
+    /// </summary>
+    /// <param name="contactPosition">設置するアイテムとグリッドが接する位置</param>
+    /// <param name="contactObjectName">設置するアイテム名</param>
+    public void SetItem(Vector3 contactPosition, string contactObjectName)
+    {
+        _gridModel.SetItem(contactPosition, contactObjectName);
+    }
+
+    /// <summary>
+    /// グリッドからアイテムを取得する処理
+    /// </summary>
+    /// <param name="getItemName">取得するアイテム名</param>
+    public void GetItem(string getItemName)
+    {
+        _gridModel.GetItem(getItemName);
     }
 
     /// <summary>
