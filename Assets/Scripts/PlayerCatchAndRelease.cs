@@ -92,12 +92,22 @@ public class PlayerCatchAndRelease : MonoBehaviour
         }
         else if (IsInfrontOfTagObject("MortarPestle") != null)
         {
-            ReleaseItem(_attachItem);
+            DestroyItem();
         }
         else if (IsInfrontOfTagObject("Item") == null)
         {
             ReleaseItem(_attachItem);
         }
+    }
+
+    /// <summary>
+    /// アイテム破棄処理
+    /// </summary>
+    private void DestroyItem()
+    {
+        Destroy(_currentItem);
+        _currentItem = null;
+        _currentItemID = 0;
     }
 
     /// <summary>
