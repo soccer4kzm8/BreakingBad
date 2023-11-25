@@ -5,11 +5,6 @@ public class ItemBoxAnimationController : MonoBehaviour
 {
     #region SerializeField
     /// <summary>
-    /// プレイヤー当たり判定Collider
-    /// </summary>
-    [SerializeField] private GameObject _collider;
-
-    /// <summary>
     /// ItemBoxアニメーター
     /// </summary>
     [SerializeField] private Animator _animator;
