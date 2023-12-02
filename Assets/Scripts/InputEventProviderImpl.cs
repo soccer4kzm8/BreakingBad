@@ -26,7 +26,7 @@ public class InputEventProviderImpl : IInputEventProviders
     /// <returns></returns>
     public bool GetCatchAndReleaseInput()
     {
-        return Input.GetKeyDown(KeyCode.E);
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
     /// <summary>
@@ -35,6 +35,6 @@ public class InputEventProviderImpl : IInputEventProviders
     /// <returns></returns>
     public bool GetThrowAndMixInput()
     {
-        return Input.GetKeyDown(KeyCode.F);
+        return Input.GetKeyDown(KeyCode.LeftControl);
     }
 }

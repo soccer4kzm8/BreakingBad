@@ -25,7 +25,7 @@ public class PestleAnimationController : MonoBehaviour
 
     private void Update()
     {
-        if (_playerInput.GetCatchAndReleaseInput() == false)
+        if (_playerInput.GetThrowAndMixInput() == false)
         {
             return;
         }
@@ -36,18 +36,12 @@ public class PestleAnimationController : MonoBehaviour
         }
 
         var currentItem = _attachPlayer.transform.parent.GetComponent<PlayerCatchAndRelease>().CurrentItem;
-        if (currentItem == null)
-        {
-            return;
-        }
-
-        if (currentItem.tag != "Item")
+        if (currentItem != null)
         {
             return;
         }
 
         _animator.SetBool(HashIsMix, true);
-
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -63,6 +57,7 @@ public class PestleAnimationController : MonoBehaviour
         if (collider.CompareTag("Player") == true)
         {
             _attachPlayer = null;
+            _animator.SetBool(HashIsMix, false);
         }
     }
 }
