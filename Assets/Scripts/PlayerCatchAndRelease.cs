@@ -7,25 +7,12 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// アイテム当たり判定Collider
     /// </summary>
     [SerializeField] private GameObject _collider;
+
+    [SerializeField] private ItemStateController _itemStateController;
     #endregion SerializeField
 
     #region private変数
     private IInputEventProviders _playerInput;
-
-    /// <summary>
-    /// 現在持っているアイテム
-    /// </summary>
-    private GameObject _currentItem = null;
-
-    /// <summary>
-    /// 現在持っているアイテムID
-    /// </summary>
-    private int _currentItemID = 0;
-
-    /// <summary>
-    /// 拾い上げられたアイテムの位置
-    /// </summary>
-    private readonly Vector3 _caughtItemPosition = new Vector3(0f, 1f, 1f);
 
     /// <summary>
     /// 接しているアイテムのCollider
@@ -34,15 +21,18 @@ public class PlayerCatchAndRelease : MonoBehaviour
     #endregion private変数
 
     #region public変数
-    /// <summary>
-    /// 現在持っているアイテム
-    /// </summary>
-    public GameObject CurrentItem => _currentItem;
+    public ItemStateController ItemStateController => _itemStateController;
     #endregion public変数
+
+    /// <summary>
+    /// 拾い上げられたアイテムの定位置
+    /// </summary>
+    private readonly Vector3 CAUGT_ITEM_POSITION = new Vector3(0f, 1f, 1f);
 
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();
+        _itemStateController.Initialize(transform);
     }
 
     private void Update()
@@ -50,7 +40,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         CatchAndRelease();
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerStay(Collider collider)
     {
         if(collider.CompareTag("Item") == true)
         {
@@ -86,13 +76,13 @@ public class PlayerCatchAndRelease : MonoBehaviour
             return;
         }
 
-        if (_currentItem == null)
+        if (ItemStateController.CurrentItemID == 0)
         {
             CatchItem(_attachItem);
         }
         else if (IsInfrontOfTagObject("MortarPestle") != null)
         {
-            DestroyItem();
+            DestoryItem(_attachItem.gameObject);
         }
         else if (IsInfrontOfTagObject("Item") == null)
         {
@@ -101,28 +91,18 @@ public class PlayerCatchAndRelease : MonoBehaviour
     }
 
     /// <summary>
-    /// アイテム破棄処理
-    /// </summary>
-    private void DestroyItem()
-    {
-        Destroy(_currentItem);
-        _currentItem = null;
-        _currentItemID = 0;
-    }
-
-    /// <summary>
     /// アイテムを拾う
     /// </summary>
     public void CatchItem(Collider collider)
     {
-        _currentItem = collider.gameObject;
-        _currentItemID = _currentItem.GetInstanceID();
-        _currentItem.transform.SetParent(transform);
-        _currentItem.transform.localPosition = _caughtItemPosition;
-        _currentItem.GetComponent<Rigidbody>().isKinematic = true;
-        // アイテムが地面に着いていない設定
-        _currentItem.GetComponent<ItemConstraintsManager>().SetIsItemOnGround(false);
-        _currentItem.GetComponent<Collider>().isTrigger = true;
+        ItemStateController.ChangeState(ItemStateController.ItemHeldState, collider.gameObject, CAUGT_ITEM_POSITION);
+    }
+
+    private void DestoryItem(GameObject itemGameObject)
+    {
+        Destroy(itemGameObject);
+        _attachItem = null;
+        ItemStateController.CurrentItemID = 0;
     }
 
     /// <summary>
@@ -139,14 +119,8 @@ public class PlayerCatchAndRelease : MonoBehaviour
         var closestPosition = gridSystem.GetClosestPos(transform.position);
         gridSystem.SetItem(closestPosition, collider.name);
         var settingPosition = new Vector3(closestPosition.x, closestPosition.y + collider.transform.localScale.y * (collider.transform.localScale.y * 0.5f), closestPosition.z);
-        _currentItem.transform.position = settingPosition;
-        _currentItem.GetComponent<Rigidbody>().isKinematic = false;
-        // アイテムが地面に着いている設定
-        _currentItem.GetComponent<ItemConstraintsManager>().SetIsItemOnGround(true);
-        _currentItem.GetComponent<Collider>().isTrigger = false;
-        _currentItem.transform.SetParent(null);
-        _currentItem = null;
-        _currentItemID = 0;
+
+        ItemStateController.ChangeState(ItemStateController.ItemOnGroundState, collider.gameObject, settingPosition);
     }
 
     /// <summary>
@@ -161,7 +135,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(rayOrigin, -this.transform.up, 2f);
         foreach (var hit in hits)
         {
-            if(hit.collider.gameObject.GetInstanceID() == _currentItemID)
+            if(hit.collider.gameObject.GetInstanceID() == ItemStateController.CurrentItemID)
             {
                 continue;
             }

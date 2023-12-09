@@ -38,7 +38,13 @@ public class ItemBoxAnimationController : MonoBehaviour
             return;
         }
 
-        if (_attachPlayer.transform.parent.GetComponent<PlayerCatchAndRelease>().CurrentItem != null)
+        var itemStateController = _attachPlayer.transform.parent.GetComponent<PlayerCatchAndRelease>().ItemStateController;
+        if(itemStateController == null)
+        {
+            return;
+        }
+
+        if (itemStateController.CurrentItemID != 0)
         {
             return;
         }

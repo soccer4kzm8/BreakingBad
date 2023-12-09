@@ -35,8 +35,8 @@ public class PestleAnimationController : MonoBehaviour
             return;
         }
 
-        var currentItem = _attachPlayer.transform.parent.GetComponent<PlayerCatchAndRelease>().CurrentItem;
-        if (currentItem != null)
+        var currentItemID = _attachPlayer.transform.parent.GetComponent<PlayerCatchAndRelease>().ItemStateController.CurrentItemID;
+        if (currentItemID != 0)
         {
             return;
         }
