@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4223266035138996651}
   - component: {fileID: 1667413551527037976}
   - component: {fileID: 3082512343865335719}
+  - component: {fileID: 259048342024886271}
   m_Layer: 0
   m_Name: MortarPestleWithLiquid
   m_TagString: MortarPestle
@@ -79,6 +80,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8518179488981924571}
+--- !u!114 &259048342024886271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295556972845881437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45b4c24b65f114469a633b5f8cb841d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayThing: {fileID: 8014299920009879915}
 --- !u!1001 &2875873765161955781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,5 +260,10 @@ PrefabInstance:
 --- !u!4 &7217736178042993619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5311117702890923583, guid: a395d3d1a07bf2e478bdd1f279e134af, type: 3}
+  m_PrefabInstance: {fileID: 3287185420565536236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8014299920009879915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4802788739414211719, guid: a395d3d1a07bf2e478bdd1f279e134af, type: 3}
   m_PrefabInstance: {fileID: 3287185420565536236}
   m_PrefabAsset: {fileID: 0}

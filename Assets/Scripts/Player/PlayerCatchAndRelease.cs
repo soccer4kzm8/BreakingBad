@@ -75,14 +75,18 @@ public class PlayerCatchAndRelease : MonoBehaviour
         {
             return;
         }
-
+        var mortarPestle = IsInfrontOfTagObject("MortarPestle");
         if (PlayerItemStateController.CurrentItemID == 0)
         {
             CatchItem(_attachItem);
         }
-        else if (IsInfrontOfTagObject("MortarPestle") != null)
+        else if (mortarPestle != null)
         {
             DestoryItem(_attachItem.gameObject);
+            var itemStateController = mortarPestle.GetComponent<ItemStateController>();
+            if (itemStateController == null) return;
+
+            itemStateController.ChangeState(itemStateController.InItemState);
         }
         else if (IsInfrontOfTagObject("Item") == null)
         {
