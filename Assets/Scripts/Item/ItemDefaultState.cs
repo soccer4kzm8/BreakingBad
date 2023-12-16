@@ -2,7 +2,17 @@ using UnityEngine;
 
 public class ItemDefaultState : IItemState
 {
+    #region private変数
+    /// <summary>
+    /// 表示させるもの
+    /// </summary>
     private GameObject _displayThing = null;
+    #endregion private変数
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="displayThing">表示させるもの</param>
     public ItemDefaultState(GameObject displayThing)
     {
         _displayThing = displayThing;

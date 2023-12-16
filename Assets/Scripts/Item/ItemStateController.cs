@@ -2,12 +2,37 @@ using UnityEngine;
 
 public class ItemStateController : MonoBehaviour
 {
+    #region SerializeField
+    /// <summary>
+    /// 表示させるもの
+    /// </summary>
     [SerializeField] private GameObject _displayThing = null;
-    private ItemDefaultState _defaultState;
-    private ItemInItemState _inItemState;
+    #endregion SerializeField
 
+    #region private変数
+    /// <summary>
+    /// Defaultステート
+    /// </summary>
+    private ItemDefaultState _defaultState;
+
+    /// <summary>
+    /// InItemステート
+    /// </summary>
+    private ItemInItemState _inItemState;
+    #endregion private変数
+
+    #region public変数
+    /// <summary>
+    /// Defaultステート
+    /// </summary>
     public ItemDefaultState DefaultState => _defaultState;
-    public ItemInItemState InItemState => _inItemState; 
+
+    /// <summary>
+    /// InItemステート
+    /// </summary>
+    public ItemInItemState InItemState => _inItemState;
+    #endregion publlic変数
+
     /// <summary>
     /// 現在のステート
     /// </summary>
