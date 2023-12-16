@@ -8,7 +8,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject _collider;
 
-    [SerializeField] private ItemStateController _itemStateController;
+    [SerializeField] private PlayerItemStateController _playerItemStateController;
     #endregion SerializeField
 
     #region private変数
@@ -21,7 +21,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
     #endregion private変数
 
     #region public変数
-    public ItemStateController ItemStateController => _itemStateController;
+    public PlayerItemStateController PlayerItemStateController => _playerItemStateController;
     #endregion public変数
 
     /// <summary>
@@ -32,7 +32,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
     private void Start()
     {
         _playerInput = new InputEventProviderImpl();
-        _itemStateController.Initialize(transform);
+        _playerItemStateController.Initialize(transform);
     }
 
     private void Update()
@@ -76,7 +76,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
             return;
         }
 
-        if (ItemStateController.CurrentItemID == 0)
+        if (PlayerItemStateController.CurrentItemID == 0)
         {
             CatchItem(_attachItem);
         }
@@ -95,14 +95,14 @@ public class PlayerCatchAndRelease : MonoBehaviour
     /// </summary>
     public void CatchItem(Collider collider)
     {
-        ItemStateController.ChangeState(ItemStateController.ItemHeldState, collider.gameObject, CAUGT_ITEM_POSITION);
+        PlayerItemStateController.ChangeState(PlayerItemStateController.PlayerItemHoldState, collider.gameObject, CAUGT_ITEM_POSITION);
     }
 
     private void DestoryItem(GameObject itemGameObject)
     {
         Destroy(itemGameObject);
         _attachItem = null;
-        ItemStateController.CurrentItemID = 0;
+        PlayerItemStateController.CurrentItemID = 0;
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         gridSystem.SetItem(closestPosition, collider.name);
         var settingPosition = new Vector3(closestPosition.x, closestPosition.y + collider.transform.localScale.y * (collider.transform.localScale.y * 0.5f), closestPosition.z);
 
-        ItemStateController.ChangeState(ItemStateController.ItemOnGroundState, collider.gameObject, settingPosition);
+        PlayerItemStateController.ChangeState(PlayerItemStateController.PlayerItemNotHoldState, collider.gameObject, settingPosition);
     }
 
     /// <summary>
@@ -135,7 +135,7 @@ public class PlayerCatchAndRelease : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(rayOrigin, -this.transform.up, 2f);
         foreach (var hit in hits)
         {
-            if(hit.collider.gameObject.GetInstanceID() == ItemStateController.CurrentItemID)
+            if(hit.collider.gameObject.GetInstanceID() == PlayerItemStateController.CurrentItemID)
             {
                 continue;
             }

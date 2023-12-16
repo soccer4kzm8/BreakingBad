@@ -1,27 +1,27 @@
 using UnityEngine;
 
-public class ItemStateController : MonoBehaviour
+public class PlayerItemStateController : MonoBehaviour
 {
     #region SerializeFiled
     /// <summary>
     /// アイテムを持っていないステート
     /// </summary>
-    [SerializeField] private ItemOnGroundState _itemOnGroundState;
+    [SerializeField] private PlayerItemNotHoldState _playerItemNotHoldState;
 
     /// <summary>
     /// アイテムを持っているステート
     /// </summary>
-    [SerializeField] private ItemHeldState _itemHeldState;
+    [SerializeField] private PlayerItemHoldState _playerItemHoldState;
     #endregion SerializeFiled
 
     #region pulic変数
-    public ItemOnGroundState ItemOnGroundState => _itemOnGroundState;
-    public ItemHeldState ItemHeldState => _itemHeldState;
+    public PlayerItemNotHoldState PlayerItemNotHoldState => _playerItemNotHoldState;
+    public PlayerItemHoldState PlayerItemHoldState => _playerItemHoldState;
 
     /// <summary>
     /// 現在のステート
     /// </summary>
-    public IItemState CurrentState { get; private set; }
+    public IPlayerItemState CurrentState { get; private set; }
 
     /// <summary>
     /// アイテムID
@@ -35,8 +35,8 @@ public class ItemStateController : MonoBehaviour
     /// <param name="moveToTransform">アイテムを持った時に移動させるTransform</param>
     public void Initialize(Transform moveToTransform)
     {
-        _itemOnGroundState.Initialize(this);
-        _itemHeldState.Initialize(moveToTransform);
+        _playerItemNotHoldState.Initialize(this);
+        _playerItemHoldState.Initialize(moveToTransform);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class ItemStateController : MonoBehaviour
     /// </summary>
     /// <param name="nextState">次のステート</param>
     /// <param name="moveToPosition">アイテムの移動ポジション</param>
-    public void ChangeState(IItemState nextState, GameObject itemGameObject, Vector3 moveToPosition)
+    public void ChangeState(IPlayerItemState nextState, GameObject itemGameObject, Vector3 moveToPosition)
     {
         CurrentState = nextState;
         CurrentItemID = itemGameObject.GetInstanceID();

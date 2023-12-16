@@ -1,5 +1,5 @@
 using UnityEngine;
-public interface IItemState
+public interface IPlayerItemState
 {
     /// <summary>
     /// Stateに入った時の処理

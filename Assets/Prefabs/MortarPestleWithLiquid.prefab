@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3082512343865335719}
   m_Layer: 0
   m_Name: MortarPestleWithLiquid
-  m_TagString: Untagged
+  m_TagString: MortarPestle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

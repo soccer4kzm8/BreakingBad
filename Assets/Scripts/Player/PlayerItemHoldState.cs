@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemHeldState : MonoBehaviour, IItemState
+public class PlayerItemHoldState : MonoBehaviour, IPlayerItemState
 {
     private Transform _moveToTrasform;
 

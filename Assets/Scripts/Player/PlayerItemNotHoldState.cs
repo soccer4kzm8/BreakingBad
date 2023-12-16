@@ -1,8 +1,8 @@
 using UnityEngine;
-public class ItemOnGroundState : MonoBehaviour, IItemState
+public class PlayerItemNotHoldState : MonoBehaviour, IPlayerItemState
 {
-    private ItemStateController _itemStateController;
-    public void Initialize(ItemStateController itemStateController)
+    private PlayerItemStateController _itemStateController;
+    public void Initialize(PlayerItemStateController itemStateController)
     {
         _itemStateController = itemStateController;
     }
