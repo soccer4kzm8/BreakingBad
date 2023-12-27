@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
-
-public class ItemInItemState : IItemState
+public class ItemCookedCompleteState : IItemState
 {
     #region private変数
     /// <summary>
@@ -14,7 +13,7 @@ public class ItemInItemState : IItemState
     /// コンストラクタ
     /// </summary>
     /// <param name="displayThing">表示させるもの</param>
-    public ItemInItemState(ItemStateController itemStateController)
+    public ItemCookedCompleteState(ItemStateController itemStateController)
     {
         try
         {
@@ -31,7 +30,7 @@ public class ItemInItemState : IItemState
     }
 
     /// <summary>
-    /// アイテム内にアイテムが入れられたステートに入った時の処理
+    /// CookedCompleteステートに入った時の処理
     /// </summary>
     public void Enter()
     {

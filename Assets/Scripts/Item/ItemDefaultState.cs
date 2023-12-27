@@ -1,21 +1,33 @@
+using System;
 using UnityEngine;
 
 public class ItemDefaultState : IItemState
 {
     #region private変数
     /// <summary>
-    /// 表示させるもの
+    /// Itemステートコントローラ
     /// </summary>
-    private GameObject _displayThing = null;
+    private readonly ItemStateController _itemStateController;
     #endregion private変数
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="displayThing">表示させるもの</param>
-    public ItemDefaultState(GameObject displayThing)
+    public ItemDefaultState(ItemStateController itemStateController)
     {
-        _displayThing = displayThing;
+        try
+        {
+            if (itemStateController == null)
+            {
+                throw new NullReferenceException();
+            }
+        }
+        catch (NullReferenceException ex)
+        {
+            Debug.LogError(ex);
+        }
+        _itemStateController = itemStateController;
     }
 
     /// <summary>
@@ -23,8 +35,16 @@ public class ItemDefaultState : IItemState
     /// </summary>
     public void Enter()
     {
-        if (_displayThing == null) return;
+        foreach (var displayThing in _itemStateController.DisplayThings)
+        {
+            displayThing.SetActive(false);
+        }
 
-        _displayThing.SetActive(false);
+        _itemStateController.HP.SetActive(false);
+    }
+
+    public void Exit()
+    {
+
     }
 }

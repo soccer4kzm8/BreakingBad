@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
-
-public class ItemInItemState : IItemState
+public class ItemCookingState : IItemState
 {
     #region private変数
     /// <summary>
@@ -14,11 +13,11 @@ public class ItemInItemState : IItemState
     /// コンストラクタ
     /// </summary>
     /// <param name="displayThing">表示させるもの</param>
-    public ItemInItemState(ItemStateController itemStateController)
+    public ItemCookingState(ItemStateController itemStateController)
     {
         try
         {
-            if (itemStateController == null)
+            if(itemStateController == null)
             {
                 throw new NullReferenceException();
             }
@@ -31,7 +30,7 @@ public class ItemInItemState : IItemState
     }
 
     /// <summary>
-    /// アイテム内にアイテムが入れられたステートに入った時の処理
+    /// Cookedステートに入った時の処理
     /// </summary>
     public void Enter()
     {
@@ -40,11 +39,15 @@ public class ItemInItemState : IItemState
             displayThing.SetActive(true);
         }
 
-        _itemStateController.HP.SetActive(false);
+        _itemStateController.HP.SetActive(true);
+        _itemStateController.Animator.SetBool("IsMix", true);
     }
 
+    /// <summary>
+    /// Cookedステートから出るとき処理
+    /// </summary>
     public void Exit()
     {
-
+        _itemStateController.Animator.SetBool("IsMix", false);
     }
 }

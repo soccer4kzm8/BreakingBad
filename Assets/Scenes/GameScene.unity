@@ -1515,7 +1515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1043195784642903258, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 1043195784642903258, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1523,7 +1523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1043195784642903258, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1043195784642903258, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1556,6 +1556,14 @@ PrefabInstance:
     - target: {fileID: 1295556972845881437, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
       propertyPath: m_Name
       value: MortarPestleWithLiquid
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078664987765627667, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078664987765627667, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b526f4974ed6c4eb1f4991e6fc99e6, type: 3}
